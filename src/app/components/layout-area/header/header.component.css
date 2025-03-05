@@ -1,0 +1,30 @@
+/* src/app/header/header.component.scss */
+
+.logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-img {
+    width: 70px;  /* Adjust the logo size */
+    height: 40px;
+    margin-right: 10px; /* Space between logo and title */
+  }
+  
+  .mat-title {
+    font-size: 24px; /* Adjust as needed */
+    font-weight: bold;
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  nav a {
+    margin-right: 20px;
+  }
+  
+  button {
+    margin-left: 20px;
+  }
+  
