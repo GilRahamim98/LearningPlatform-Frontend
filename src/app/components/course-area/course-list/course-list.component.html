@@ -1,20 +1,5 @@
 <div>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Created at</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (c of courses; track c.id) {
-            <tr >
-                <td>{{c.title}}</td>
-                <td>{{c.createdAt}}</td>
-            </tr>
-            }
-        </tbody>
-    </table>
-
+    @for (c of courses; track c.id) {
+        <app-course-card [course]="c"/>
+    }
 </div>
