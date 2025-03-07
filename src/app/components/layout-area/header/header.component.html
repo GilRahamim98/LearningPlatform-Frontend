@@ -1,23 +1,30 @@
 <mat-toolbar color="primary">
     <div class="logo">
         <div class="logo-img">
-            <app-logo/>
-          </div>
+            <app-logo />
+        </div>
+        
         <span class="mat-title">AcademiaX</span>
 
     </div>
-  
+
     <span class="spacer"></span>
-  
+
     <nav>
-      <a mat-button routerLink="/" routerLinkActive="active">Home</a>
-      <a mat-button routerLink="/courses" routerLinkActive="active">Courses</a>
-      <a mat-button routerLink="/about" routerLinkActive="active">About</a>
-      <a mat-button routerLink="/contact" routerLinkActive="active">Contact</a>
+        <a mat-button routerLink="/" routerLinkActive="active">Home</a>
+        <a mat-button routerLink="/courses" routerLinkActive="active">Courses</a>
+        <a mat-button routerLink="/about" routerLinkActive="active">About</a>
+        <a mat-button routerLink="/contact" routerLinkActive="active">Contact</a>
     </nav>
-  
+
     <div>
-      <button mat-raised-button color="accent" routerLink="/login">Login</button>
+        @if(userStore.user()){
+           <span>Hey There {{userStore.user().name}}</span>
+           <button mat-raised-button color="accent" routerLink="/home" (click)="logout()">Logout</button>
+        }@else{
+            <button mat-raised-button color="accent" routerLink="/login">Login</button>
+            <button mat-raised-button color="accent" routerLink="/register">Register</button>
+        }
+        
     </div>
-  </mat-toolbar>
-  
+</mat-toolbar>

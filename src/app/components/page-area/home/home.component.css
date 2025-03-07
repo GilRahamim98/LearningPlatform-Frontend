@@ -1,0 +1,43 @@
+/* Centered Card Container */
+.home-container {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+/* Home Card Styling */
+.home-card {
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background: white;
+}
+
+/* Title Styling */
+h1 {
+    color: #820bd2;
+    margin-bottom: 1rem;
+}
+
+/* Paragraph Styling */
+p {
+    font-size: 1.1rem;
+    color: #444;
+    margin-bottom: 2rem;
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+/* Button Styling */
+button {
+    font-weight: bold;
+}

@@ -1,0 +1,49 @@
+/* Centered card container */
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.register-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background: white;
+}
+
+/* Form Title */
+h2 {
+    text-align: center;
+    color: #820bd2;
+    margin-bottom: 1rem;
+}
+
+/* Full-width form fields */
+.full-width {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+/* Button Styling */
+button {
+    background-color: #820bd2;
+    color: white;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #7200b8;
+}
+
+/* Input field styling */
+.mat-form-field-appearance-outline .mat-form-field-outline {
+    color: #820bd2;
+}
+
+.mat-form-field.mat-focused .mat-form-field-outline-thick {
+    color: #e91e63;
+}

@@ -1,18 +1,21 @@
-/* src/app/header/header.component.scss */
-
+a{
+    color: #820bd2;
+    text-decoration: none;
+}
 .logo {
     display: flex;
     align-items: center;
   }
   
   .logo-img {
-    width: 70px;  /* Adjust the logo size */
-    height: 40px;
-    margin-right: 10px; /* Space between logo and title */
+    width: 70px;  
+    height: 20px;
+    margin-right: 10px; 
   }
   
   .mat-title {
-    font-size: 24px; /* Adjust as needed */
+    color: #820bd2;
+    font-size: 24px; 
     font-weight: bold;
   }
   
@@ -26,5 +29,9 @@
   
   button {
     margin-left: 20px;
+  }
+
+  mat-toolbar{
+    background-color: white;
   }
   

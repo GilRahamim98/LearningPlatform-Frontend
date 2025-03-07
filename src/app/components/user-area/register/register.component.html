@@ -1,0 +1,48 @@
+<div class="register-container">
+    <mat-card class="register-card">
+      
+      <h2>Register</h2>
+  
+      <form [formGroup]="userForm" (ngSubmit)="send()">
+  
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Name</mat-label>
+          <input matInput type="text" formControlName="nameControl" placeholder="Enter your name">
+          <mat-error *ngIf="userForm.get('nameControl')?.invalid && userForm.get('nameControl')?.touched">
+            Name must be at least 3 characters
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="emailControl" placeholder="Enter your email">
+          <mat-error *ngIf="userForm.get('emailControl')?.invalid && userForm.get('emailControl')?.touched">
+            Please enter a valid email
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="passwordControl" placeholder="Enter your password">
+          <mat-error *ngIf="userForm.get('passwordControl')?.invalid && userForm.get('passwordControl')?.touched">
+            Password must be at least 6 characters
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Role</mat-label>
+          <input matInput type="number" formControlName="roleControl" placeholder="Enter role (1 for Student, 2 for Instructor)">
+          <mat-error *ngIf="userForm.get('roleControl')?.invalid && userForm.get('roleControl')?.touched">
+            Role must be 1 (Student) or 2 (Instructor)
+          </mat-error>
+        </mat-form-field>
+  
+        <button mat-raised-button color="primary" class="full-width" [disabled]="userForm.invalid">
+          Register
+        </button>
+  
+      </form>
+  
+    </mat-card>
+  </div>
+  
