@@ -23,8 +23,6 @@ export class CourseListComponent implements OnInit {
     ) { }
     public async ngOnInit() {
         try {
-            console.log();
-            
             if (this.courseStore.count() > 0)
                 this.courses = this.courseStore.courses();
             else

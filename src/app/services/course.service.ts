@@ -14,7 +14,7 @@ export class CourseService {
     private courseStore = inject(CourseStore);
 
     public async getAllCourses(): Promise<CourseModel[]> {
-        if(this.courseStore.count()) return this.courseStore.courses();
+        if(this.courseStore.count() > 0) return this.courseStore.courses();
         const courses$ = this.http.get<CourseModel[]>(environment.coursesUrl);
         const courses = await firstValueFrom(courses$);
         return courses;

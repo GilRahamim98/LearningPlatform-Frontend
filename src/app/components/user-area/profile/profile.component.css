@@ -1,0 +1,48 @@
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.profile-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background: white;
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.profile-icon {
+    color: #820bd2;
+}
+
+.role-badge {
+    background: #e91e63;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.profile-details p {
+    font-size: 1.1rem;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+button {
+    margin-top: 1rem;
+    font-weight: bold;
+}

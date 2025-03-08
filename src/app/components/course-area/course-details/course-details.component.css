@@ -1,0 +1,33 @@
+.course-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 2rem;
+}
+
+.course-details-card {
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background: white;
+    text-align: left;
+}
+
+.course-icon {
+    font-size: 50px;
+    color: #820bd2;
+    margin-bottom: 10px;
+}
+
+.course-description {
+    font-size: 1.1rem;
+    color: #444;
+}
+
+button {
+    margin-top: 1rem;
+    font-weight: bold;
+}

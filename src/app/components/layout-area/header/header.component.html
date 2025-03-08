@@ -3,7 +3,7 @@
         <div class="logo-img">
             <app-logo />
         </div>
-        
+
         <span class="mat-title">AcademiaX</span>
 
     </div>
@@ -19,12 +19,15 @@
 
     <div>
         @if(userStore.user()){
-           <span>Hey There {{userStore.user().name}}</span>
-           <button mat-raised-button color="accent" routerLink="/home" (click)="logout()">Logout</button>
+        <button mat-button [matMenuTriggerFor]="menu">{{userStore.user().name}}</button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLink="/profile">My Profile</button>
+            <button mat-menu-item routerLink="/home" (click)="logout()">Logout</button>
+        </mat-menu>
         }@else{
-            <button mat-raised-button color="accent" routerLink="/login">Login</button>
-            <button mat-raised-button color="accent" routerLink="/register">Register</button>
+        <button mat-raised-button color="accent" routerLink="/login">Login</button>
+        <button mat-raised-button color="accent" routerLink="/register">Register</button>
         }
-        
+
     </div>
 </mat-toolbar>

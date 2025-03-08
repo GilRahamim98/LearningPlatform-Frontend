@@ -6,10 +6,12 @@ import { CommonModule } from '@angular/common';
 import { UserStore } from '../../../storage/user-store';
 import { UserService } from '../../../services/user.service';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule,MatToolbarModule,RouterLink,LogoComponent,MatIconModule],
+  imports: [CommonModule,MatToolbarModule,RouterLink,LogoComponent,MatIconModule,MatButtonModule, MatMenuModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
