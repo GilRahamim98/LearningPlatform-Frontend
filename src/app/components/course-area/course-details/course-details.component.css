@@ -1,14 +1,16 @@
+/* Course Details Container */
 .course-details-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    margin-top: 5rem;
     padding: 2rem;
 }
 
+/* Course Details Card */
 .course-details-card {
     width: 100%;
-    max-width: 500px;
+    max-width: 600px;
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -16,18 +18,38 @@
     text-align: left;
 }
 
+/* Course Icon */
 .course-icon {
-    font-size: 50px;
-    color: #820bd2;
+    color: #d32f2f; /* Rose Red icon */
     margin-bottom: 10px;
 }
 
+/* Course Description */
 .course-description {
     font-size: 1.1rem;
     color: #444;
 }
 
-button {
-    margin-top: 1rem;
+/* Lessons Section */
+.lessons-container {
+    margin-top: 3rem;
+    padding: 2rem;
+    text-align: center;
+}
+
+/* Lessons Title */
+.lessons-title {
+    font-size: 2rem;
     font-weight: bold;
+    color: #d32f2f; /* Rose Red title */
+    margin-bottom: 1.5rem;
+}
+
+/* Grid for Lessons */
+.lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    padding: 0 2rem;
 }

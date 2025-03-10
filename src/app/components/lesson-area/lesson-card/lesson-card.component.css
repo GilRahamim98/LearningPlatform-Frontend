@@ -1,0 +1,91 @@
+/* Lessons Grid Container */
+.lessons-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 2rem;
+}
+
+/* Lesson Card */
+.lesson-card {
+    width: 300px;  
+    height: 250px; /* Increased height for balance */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center; /* Center content horizontally */
+    padding: 1rem;
+    text-align: center;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden; 
+}
+
+/* Lesson Title - Allows Multi-line */
+.lesson-card mat-card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    max-width: 100%;
+    white-space: normal;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+}
+
+/* Course ID */
+.lesson-card mat-card-content p {
+    font-size: 0.9rem;
+    color: #444;
+    word-wrap: break-word;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+}
+
+/* Icon Styling */
+.lesson-icon {
+    color: #d32f2f; /* Rose Red for lesson icon */
+}
+
+/* Centered Button */
+.lesson-card mat-card-actions {
+    display: flex;
+    justify-content: center; /* Centers button horizontally */
+    align-items: center; /* Ensures vertical centering */
+    width: 100%;
+    padding: 10px 0;
+}
+
+button {
+    background-color: #d32f2f; /* Rose Red background */
+    color: white;
+}
+
+button:hover {
+    background-color: #c2185b; /* Darker shade of rose red on hover */
+}
+
+/* Button Styling */
+.flickering-button {
+    background-color: #d32f2f; /* Rose Red color */
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    animation: flickerAnimation 1.5s infinite; /* Apply flicker animation */
+  }
+  
+  /* Hover Effect */
+  .flickering-button:hover {
+    background-color: #c2185b; /* Darker Rose Red on hover */
+    transform: scale(1.05);
+  }
+  
+  

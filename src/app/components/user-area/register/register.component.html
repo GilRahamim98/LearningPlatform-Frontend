@@ -8,25 +8,47 @@
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Name</mat-label>
           <input matInput type="text" formControlName="nameControl" placeholder="Enter your name">
-          <mat-error *ngIf="userForm.get('nameControl')?.invalid && userForm.get('nameControl')?.touched">
-            Name must be at least 3 characters
+          <mat-error *ngIf="userForm.get('nameControl')?.hasError('required') && userForm.get('nameControl')?.touched">
+            Name is required
           </mat-error>
+          <mat-error *ngIf="userForm.get('nameControl')?.hasError('minlength') && userForm.get('nameControl')?.touched">
+            Name must be at least 2 characters
+          </mat-error>
+          <mat-error *ngIf="userForm.get('nameControl')?.hasError('maxlength') && userForm.get('nameControl')?.touched">
+            Name must be at most 50 characters long
+          </mat-error>
+          
         </mat-form-field>
   
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Email</mat-label>
           <input matInput type="email" formControlName="emailControl" placeholder="Enter your email">
-          <mat-error *ngIf="userForm.get('emailControl')?.invalid && userForm.get('emailControl')?.touched">
-            Please enter a valid email
+          <mat-error *ngIf="userForm.get('emailControl')?.hasError('required') && userForm.get('emailControl')?.touched">
+            Email is required
+          </mat-error>
+          <mat-error *ngIf="userForm.get('emailControl')?.hasError('maxlength') && userForm.get('emailControl')?.touched">
+            Email must be at most 100 characters long
+          </mat-error>
+          <mat-error *ngIf="userForm.get('emailControl')?.hasError('email') && userForm.get('emailControl')?.touched">
+            Email must be valid
           </mat-error>
         </mat-form-field>
   
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Password</mat-label>
           <input matInput type="password" formControlName="passwordControl" placeholder="Enter your password">
-          <mat-error *ngIf="userForm.get('passwordControl')?.invalid && userForm.get('passwordControl')?.touched">
-            Password must be at least 6 characters
+          <mat-error *ngIf="userForm.get('passwordControl')?.hasError('required') && userForm.get('passwordControl')?.touched">
+            Password is required
           </mat-error>
+          <mat-error *ngIf="userForm.get('passwordControl')?.hasError('minlength') && userForm.get('passwordControl')?.touched">
+            Password must be at least 8 characters
+          </mat-error>
+          <mat-error *ngIf="userForm.get('passwordControl')?.hasError('maxlength') && userForm.get('passwordControl')?.touched">
+            Password must be at most 100 characters long
+          </mat-error>
+          <mat-error *ngIf="userForm.get('passwordControl')?.hasError('pattern')&& userForm.get('passwordControl')?.touched">
+            Password must contain at least one uppercase letter, one number, and one special character
+        </mat-error>
         </mat-form-field>
   
         <mat-form-field appearance="outline" class="full-width">

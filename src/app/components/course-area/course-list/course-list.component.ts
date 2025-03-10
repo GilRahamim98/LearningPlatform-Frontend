@@ -10,7 +10,7 @@ import { CourseStore } from '../../../storage/course-store';
     selector: 'app-course-list',
     imports: [CommonModule, CourseCardComponent],
     templateUrl: './course-list.component.html',
-    styleUrl: './course-list.component.scss'
+    styleUrl: './course-list.component.css'
 })
 export class CourseListComponent implements OnInit {
 

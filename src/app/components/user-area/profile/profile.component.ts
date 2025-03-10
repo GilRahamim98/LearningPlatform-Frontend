@@ -5,10 +5,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { UserModel } from '../../../models/user.model';
 import { UserStore } from '../../../storage/user-store';
+import { EnrollmentStore } from '../../../storage/enrollment-store';
+import { EnrollmentListComponent } from "../enrollment-list/enrollment-list.component";
 
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule,MatCardModule,MatButtonModule,MatIconModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, EnrollmentListComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -16,8 +18,9 @@ export class ProfileComponent implements OnInit{
     public user:UserModel;
 
     public userStore = inject(UserStore);
+    public enrollmentStore = inject(EnrollmentStore);
 
-    public ngOnInit(): void {
+    public ngOnInit(): void {        
         this.user = this.userStore.user();
     }
 

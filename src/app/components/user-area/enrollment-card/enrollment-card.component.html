@@ -1,0 +1,25 @@
+<mat-card class="enrollment-card">
+    <mat-card-header>
+        <mat-card-title>{{ course.title }}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card class="progress-card">
+        <mat-card-content>
+            <h2 class="progress-title">Progress:</h2>
+            <section class="example-section">
+                <div>
+                    <mat-progress-spinner class="background-spinner" [mode]="mode"
+                        [value]=100></mat-progress-spinner>
+                    <mat-progress-spinner [mode]="mode" [value]="value"></mat-progress-spinner>
+                    <div style="position:relative; top: -60px; ">{{value}}%</div>
+                </div>
+            </section>
+            <p class="progress-text">{{ progress?.watched }} / {{ progress?.total }} lessons completed</p>
+        </mat-card-content>
+
+        <mat-card-actions>
+            <button mat-raised-button color="accent" (click)="viewCourseDetails(course.id)">View Course</button>
+            <button mat-raised-button color="accent" (click)="unenroll()">Unenroll</button>
+        </mat-card-actions>
+    </mat-card>
+</mat-card>

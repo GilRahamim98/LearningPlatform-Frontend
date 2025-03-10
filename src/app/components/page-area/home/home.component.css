@@ -1,43 +1,120 @@
-/* Centered Card Container */
-.home-container {
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    text-align: center;
-}
-
-/* Home Card Styling */
+/* General Card Styling */
 .home-card {
-    width: 100%;
-    max-width: 500px;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    background: white;
-}
-
-/* Title Styling */
-h1 {
-    color: #820bd2;
-    margin-bottom: 1rem;
-}
-
-/* Paragraph Styling */
-p {
-    font-size: 1.1rem;
-    color: #444;
-    margin-bottom: 2rem;
-}
-
-/* Button Container */
-.button-container {
-    display: flex;
-    justify-content: space-around;
-}
-
-/* Button Styling */
-button {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+  }
+  
+  /* Header Section */
+  mat-card-header {
+    background-color: #d32f2f; /* Rose Red */
+    color: white;
+    padding: 16px;
+    border-radius: 12px 12px 0 0;
+  }
+  
+  mat-card-title {
+    font-size: 2rem;
     font-weight: bold;
-}
+    text-align: center;
+  }
+  
+  /* Content Section */
+  mat-card-content {
+    padding: 20px;
+  }
+  
+  .intro-text {
+    font-size: 1.1rem;
+    color: #555;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .section-heading {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #d32f2f; /* Rose Red */
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  /* Feature List Styling */
+  .feature-list {
+    font-size: 1.1rem;
+    color: #555;
+    list-style-type: disc;
+    margin-left: 20px;
+  }
+  
+  .feature-list li {
+    margin-bottom: 10px;
+  }
+  
+  /* Course List Styling */
+  .course-list {
+    font-size: 1.1rem;
+    color: #555;
+  }
+  
+  mat-list-item {
+    font-weight: 500;
+  }
+  
+  /* Hover Effects */
+  mat-list-item:hover {
+    background-color: #f5f5f5;
+    cursor: pointer;
+    transform: scale(1.02);
+    transition: all 0.3s ease;
+  }
+  
+  /* Button-like hover effect for text links */
+  mat-list-item:active {
+    background-color: #e3e3e3;
+  }
+  
+  /* Final Call-to-Action */
+  p {
+    font-size: 1.1rem;
+    text-align: center;
+    color: #555;
+  }
+  
+  .home-card mat-card-content p {
+    font-size: 1.1rem;
+    color: #333;
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    font-weight: 600;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .home-card {
+      margin: 10px;
+    }
+    
+    .intro-text {
+      font-size: 1rem;
+    }
+  
+    .section-heading {
+      font-size: 1.3rem;
+    }
+  
+    .feature-list {
+      font-size: 1rem;
+    }
+  
+    .course-list {
+      font-size: 1rem;
+    }
+  }
+  

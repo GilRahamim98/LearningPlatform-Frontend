@@ -1,0 +1,11 @@
+.enrollment-list-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+  
+}
+
+.enrollment-card-item{
+    max-width: 300px;
+}

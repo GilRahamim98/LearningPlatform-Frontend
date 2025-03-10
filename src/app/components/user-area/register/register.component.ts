@@ -28,10 +28,10 @@ export class RegisterComponent implements OnInit {
 
     public ngOnInit(): void {
         this.userForm = this.formBuilder.group({
-            nameControl:new FormControl(""),
-            emailControl:new FormControl(""),
-            passwordControl:new FormControl(""),
-            roleControl:new FormControl("",[Validators.min(1),Validators.max(2)])
+            nameControl:new FormControl("",[Validators.required,Validators.minLength(2),Validators.maxLength(50)]),
+            emailControl:new FormControl("",[Validators.required,Validators.maxLength(100),Validators.email]),
+            passwordControl:new FormControl("",[Validators.required,Validators.minLength(8),Validators.maxLength(100),Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/)]),
+            roleControl:new FormControl("",[Validators.required,Validators.min(1),Validators.max(2)])
         })
     }
 

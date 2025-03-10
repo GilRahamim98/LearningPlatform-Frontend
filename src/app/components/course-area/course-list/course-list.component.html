@@ -1,5 +1,6 @@
-<div>
+<h1>Our Courses</h1>
+<div class="course-list-container">
     @for (c of courses; track c.id) {
-        <app-course-card [course]="c"/>
+        <app-course-card [course]="c" class="course-card-item"/>
     }
 </div>

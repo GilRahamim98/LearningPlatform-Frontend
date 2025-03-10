@@ -1,0 +1,139 @@
+.enrollment-card {
+    width: 100%;
+    /* Ensures consistency */
+    min-height: 400px;
+    /* Ensures all cards have the same height */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Distribute content evenly */
+}
+
+/* Header Styling */
+mat-card-header {
+    background-color: #d32f2f;
+    color: white;
+    padding: 16px;
+    border-radius: 12px 12px 0 0;
+    height: 13vh;
+    min-height: 75px;
+}
+
+/* Title Styling */
+mat-card-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Content Section */
+mat-card-content {
+    padding: 16px;
+    flex-grow: 1;
+    /* Let content fill available space */
+}
+
+/* Progress Title */
+.progress-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #d32f2f;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Progress Text */
+.progress-text {
+    font-size: 1rem;
+    color: #333;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* No Progress Text */
+.no-progress {
+    font-size: 1.2rem;
+    color: #f44336;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Progress Section */
+.example-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Button Section */
+mat-card-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.background-spinner {
+    position: absolute;
+}
+
+.background-spinner::ng-deep circle {
+    stroke: rgb(211, 190, 190) !important;
+}
+
+/* Button Styling */
+button {
+    font-weight: 600;
+    padding: 12px 30px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #d32f2f, #c2185b);
+    color: white;
+    border: none;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background: linear-gradient(135deg, #c2185b, #d32f2f);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+button:focus {
+    outline: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .enrollment-card-item {
+        flex: 1 1 100%;
+        /* Full width on smaller screens */
+    }
+
+    .progress-title {
+        font-size: 1.3rem;
+    }
+
+    .progress-text {
+        font-size: 0.9rem;
+    }
+
+    .no-progress {
+        font-size: 1rem;
+    }
+
+    button {
+        font-size: 1rem;
+        padding: 10px 25px;
+    }
+}

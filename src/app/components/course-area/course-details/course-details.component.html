@@ -8,8 +8,18 @@
   
       <mat-card-content>
         <p class="course-description">{{ course.description }}</p>
-
       </mat-card-content>
-  
+
     </mat-card>
+</div>
+
+@if(lessons.length > 0) {
+  <div class="lessons-container">
+    <h2 class="lessons-title">Lessons</h2>
+    <div class="lessons-grid">
+      @for (l of lessons; track l.id) {
+          <app-lesson-card [lesson]="l" />
+      }
+    </div>
   </div>
+} 

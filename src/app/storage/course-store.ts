@@ -1,6 +1,8 @@
 import { patchState, signalStore, withComputed, withMethods, withState } from "@ngrx/signals";
 import { CourseModel } from "../models/course.model"
 import { computed } from "@angular/core";
+import { environment } from "../../environments/environment";
+import { withDevtools } from "@angular-architects/ngrx-toolkit";
 
 export type CourseState ={
     courses:CourseModel[];
@@ -31,5 +33,6 @@ export const CourseStore = signalStore(
 
     withComputed(store=>({
         count:computed(()=>store.courses().length)
-    }))
+    })),
+    environment.isDevelopment && withDevtools("CourseStore")
 )

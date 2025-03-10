@@ -1,14 +1,33 @@
-<div class="home-container">
-    <mat-card class="home-card" style="background-color: white;">
-      
-      <h1>Welcome to AcademiaX</h1>
-      <p>Your gateway to unlimited learning and growth. Join courses, track your progress, and become an expert!</p>
+<mat-card class="home-card">
+    <mat-card-header>
+      <mat-card-title>Welcome to Our Online Learning Platform</mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <p class="intro-text">
+        Learn at your own pace with our expert-led courses. Explore a variety of subjects including 
+        programming, business, design, and more.
+      </p>
   
-      <div class="button-container">
-        <button mat-raised-button color="primary" routerLink="/courses">Browse Courses</button>
-        <button mat-raised-button color="accent" routerLink="/register">Get Started</button>
-      </div>
+      <h3 class="section-heading">Why Choose Us?</h3>
+      <ul class="feature-list">
+        <li>High-quality courses from experienced instructors</li>
+        <li>Learn anytime, anywhere</li>
+        <li>Track your progress with detailed analytics</li>
+      </ul>
   
-    </mat-card>
-  </div>
+      <h3 class="section-heading">Popular Courses</h3>
+      <mat-list class="course-list">
+        <mat-list-item>Introduction to C#</mat-list-item>
+        <mat-list-item>Advanced Angular Development</mat-list-item>
+        <mat-list-item>Database Management with SQL</mat-list-item>
+        <mat-list-item>Building REST APIs with .NET</mat-list-item>
+      </mat-list>
+  
+      <h3 class="section-heading">Get Started Today!</h3>
+      <p>
+        Sign up to access hundreds of free and premium courses designed to help you achieve your learning goals.
+      </p>
+    </mat-card-content>
+  </mat-card>
   

@@ -1,0 +1,27 @@
+<mat-card class="lesson-card">
+  
+    <mat-icon class="lesson-icon">play_circle</mat-icon>
+    <mat-card-header>
+        <mat-card-title>{{ lesson.title }}</mat-card-title>
+    </mat-card-header>
+  
+    <mat-card-content>
+        @if(isWatched){
+            <span>You already watched this lesson...</span>
+        }
+    </mat-card-content>
+  
+    @if(userStore.user()){
+        <mat-card-actions >
+            <button mat-raised-button color="accent" (click)="openVideo()">Watch Lesson</button>
+          </mat-card-actions>
+    }@else{
+        <button mat-raised-button class="flickering-button">
+            Log in To Watch
+          </button>
+    }
+  
+  
+      
+  </mat-card>
+  

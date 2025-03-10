@@ -8,15 +8,20 @@
     </mat-card-content>
 
     <mat-card-actions>
-        <div class="example-button-row">
+        <div class="example-button-row" >
             <div class="example-flex-container">
-                <div class="example-button-container">
-                    <button mat-fab >
-                        Enroll
-                    </button>
+                <div class="example-button-container" *ngIf="userStore.RoleName() === 'Student' ">
+                    @if(!isEnrolled){
+                        <button mat-raised-button color="accent" class="enroll-button" (click)="enrollStudent()" >
+                            Enroll
+                        </button>
+                    }@else{
+                        <span>You already enrolled!</span>
+                    }
+                   
                 </div>
-                <div class="example-button-container">
-                    <button mat-fab (click)="displayDetails(course.id)" >
+                <div class="example-button-container" [ngClass]="{'center' :!isEnrolled}">
+                    <button mat-raised-button color="primary" class="see-more-button" (click)="displayDetails(course.id)">
                         See more
                     </button>
                 </div>

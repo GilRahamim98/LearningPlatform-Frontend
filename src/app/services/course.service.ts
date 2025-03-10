@@ -4,6 +4,7 @@ import { CourseModel } from '../models/course.model';
 import { environment } from '../../environments/environment';
 import { firstValueFrom } from 'rxjs';
 import { CourseStore } from '../storage/course-store';
+import { EnrollmentModel } from '../models/enrollment.model';
 
 @Injectable({
     providedIn: 'root'
@@ -17,6 +18,7 @@ export class CourseService {
         if(this.courseStore.count() > 0) return this.courseStore.courses();
         const courses$ = this.http.get<CourseModel[]>(environment.coursesUrl);
         const courses = await firstValueFrom(courses$);
+        this.courseStore.initCourses(courses);
         return courses;
     }
 
@@ -31,7 +33,6 @@ export class CourseService {
     }
 
     public async addCourse(course: CourseModel): Promise<void> {
-
         const dbCourse$ = this.http.post<CourseModel>(environment.coursesUrl,course);
         const dbCourse = await firstValueFrom(dbCourse$);
         this.courseStore.addCourse(dbCourse);

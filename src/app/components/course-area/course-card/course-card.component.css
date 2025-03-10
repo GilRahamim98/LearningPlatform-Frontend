@@ -1,68 +1,90 @@
-mat-card{
-    background-color: white;
-}
-
 .course-card {
     width: 100%;
-    max-width: 400px;
-    margin: 15px auto;
+    max-width: 350px;  
+    height: 300px;     
+    margin: 15px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
   }
   
-  .course-card img {
-    max-height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-  
-  .mat-card-title {
+/* Title Styling */
+.mat-card-title {
     font-weight: bold;
-  }
-  
-  .mat-card-subtitle {
-    font-size: 14px;
-    color: gray;
-  }
-  
-  .mat-card-content {
+    color: #d32f2f; /* Rose Red title */
+}
+
+/* Content Styling */
+.mat-card-content {
     font-size: 16px;
     color: #333;
-  }
-  
-  button {
-    margin-right: 10px;
-  }
+}
 
-  section {
-    display: table;
-  }
-  
-  .example-label {
-    display: table-cell;
-    font-size: 14px;
-    margin-left: 8px;
-    min-width: 120px;
-  }
-  
-  .example-button-row {
-    display: table-cell;
-    max-width: 600px;
-  }
-  
-  .example-button-row .mat-mdc-button-base {
-    margin: 8px 8px 8px 0;
-  }
-  
-  .example-flex-container {
+/* Button Row Styling */
+.example-button-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Button Styling */
+button {
+    margin-right: 10px;
+    font-weight: bold;
+    border-radius: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Enroll Button Styling */
+.enroll-button {
+    background-color: #d32f2f; /* Rose Red button background */
+    color: white;
+}
+
+.enroll-button:hover {
+    background-color: #c2185b; /* Darker Rose Red on hover */
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+/* See More Button Styling */
+.see-more-button {
+    background-color: #d32f2f; /* Rose Red background */
+    color: white;
+}
+
+.see-more-button:hover {
+    background-color: #c2185b; /* Darker Rose Red on hover */
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+
+/* Flex Container for Buttons */
+.example-flex-container {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-  }
-  
-  .example-button-container {
+}
+
+/* Button Container */
+.example-button-container {
     display: flex;
     justify-content: center;
     width: 140px;
-  }
-  
+}
+.example-button-container center{
+    justify-content: center;
+
+}
+
+/* Responsive Styling for Smaller Screens */
+@media screen and (max-width: 768px) {
+    /* On smaller screens, allow cards to take up full width */
+    .course-card {
+        width: 100%;
+        max-width: 100%; /* Ensures the card takes full width */
+    }
+}

@@ -4,15 +4,16 @@
       <div class="profile-header">
         <mat-icon class="profile-icon">person</mat-icon>
         <h2>{{ user?.name }}</h2>
-        <p class="role-badge">{{ user?.roleId === 1 ? 'Student' : 'Instructor' }}</p>
+        <p class="role-badge"><strong>{{ user?.roleId === 1 ? 'Student' : 'Instructor' }}</strong></p>
       </div>
   
       <div class="profile-details">
         <p><strong>Email:</strong> {{ user?.email }}</p>
-        <p><strong>Role ID:</strong> {{ user?.roleId }}</p>
       </div>
   
   
     </mat-card>
-  </div>
+    <app-enrollment-list/>
+    
+</div>
   
