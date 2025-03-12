@@ -1,36 +1,47 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { CourseModel } from '../../../models/course.model';
 import { CourseService } from '../../../services/course.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CourseCardComponent } from "../course-card/course-card.component";
-import { CourseStore } from '../../../storage/course-store';
+import { UserStore } from '../../../storage/user-store';
+import { MatIconModule } from '@angular/material/icon';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
     selector: 'app-course-list',
-    imports: [CommonModule, CourseCardComponent],
+    imports: [CommonModule, CourseCardComponent,MatIconModule],
     templateUrl: './course-list.component.html',
-    styleUrl: './course-list.component.css'
+    styleUrl: './course-list.component.css',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseListComponent implements OnInit {
 
-    public courses: CourseModel[] = [];
-    private courseStore = inject(CourseStore);
+    public userStore = inject(UserStore);
+    public courses = signal<CourseModel[]>([]);
 
     public constructor(
         private courseService: CourseService,
-        private router: Router
+        private router: Router,
+        private notificationService: NotificationService
     ) { }
     public async ngOnInit() {
         try {
-            if (this.courseStore.count() > 0)
-                this.courses = this.courseStore.courses();
-            else
-                this.courses = await this.courseService.getAllCourses();
+            this.courses.set(await this.courseService.getAllCourses());
         } catch (err: any) {
-            alert(err.message);
+            this.notificationService.error(err.message);
         }
     }
+
+    public addCourse(){
+        this.router.navigateByUrl('/courses/new');
+    }
+
+    public handleDeletedCourse(courseId: string) {
+        this.courses.set(this.courses().filter(course => course.id !== courseId));
+    }
+
+
 }
 
 

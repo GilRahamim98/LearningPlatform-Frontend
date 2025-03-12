@@ -1,32 +1,49 @@
 <div class="login-container">
     <mat-card class="login-card">
-      
-      <h2>Login</h2>
-  
-      <form [formGroup]="credentialsForm" (ngSubmit)="send()">
-        
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Email</mat-label>
-          <input matInput type="email" formControlName="emailControl" placeholder="Enter your email">
-          <mat-error *ngIf="credentialsForm.get('emailControl')?.invalid && credentialsForm.get('emailControl')?.touched">
-            Please enter a valid email
-          </mat-error>
-        </mat-form-field>
-  
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Password</mat-label>
-          <input matInput type="password" formControlName="passwordControl" placeholder="Enter your password">
-          <mat-error *ngIf="credentialsForm.get('passwordControl')?.invalid && credentialsForm.get('passwordControl')?.touched">
-            Password must be at least 6 characters
-          </mat-error>
-        </mat-form-field>
-  
-        <button mat-raised-button color="primary" class="full-width" [disabled]="credentialsForm.invalid">
-          Login
-        </button>
-  
-      </form>
-  
+
+        <h2>Login</h2>
+
+        <form [formGroup]="credentialsForm" (ngSubmit)="send()">
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" formControlName="emailControl" placeholder="Enter your email">
+                <mat-error
+                    *ngIf="credentialsForm.get('emailControl')?.hasError('required') && credentialsForm.get('emailControl')?.touched">
+                    Email is required
+                </mat-error>
+                <mat-error
+                    *ngIf="credentialsForm.get('emailControl')?.hasError('maxlength') && credentialsForm.get('emailControl')?.touched">
+                    Email must be at most 100 characters long
+                </mat-error>
+                <mat-error
+                    *ngIf="credentialsForm.get('emailControl')?.hasError('email') && credentialsForm.get('emailControl')?.touched">
+                    Email must be valid
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="passwordControl" placeholder="Enter your password">
+                <mat-error
+                    *ngIf="credentialsForm.get('passwordControl')?.hasError('required') && credentialsForm.get('passwordControl')?.touched">
+                    Password is required
+                </mat-error>
+                <mat-error
+                    *ngIf="credentialsForm.get('passwordControl')?.hasError('minlength') && credentialsForm.get('passwordControl')?.touched">
+                    Password must be at least 8 characters
+                </mat-error>
+                <mat-error
+                    *ngIf="credentialsForm.get('passwordControl')?.hasError('maxlength') && credentialsForm.get('passwordControl')?.touched">
+                    Password must be at most 100 characters long
+                </mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" class="login-button" [disabled]="credentialsForm.invalid">
+                Login
+            </button>
+
+        </form>
+
     </mat-card>
-  </div>
-  
+</div>

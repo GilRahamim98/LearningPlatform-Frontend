@@ -1,13 +1,56 @@
+h1{
+    color: #2f2fd3; 
+}
+
 .course-list-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 20px;
+    justify-content: center; 
+    row-gap: 10px;
     padding: 2rem;
+    margin: 0 20%;
 }
 
 .course-card-item {
-    width: 300px;
-    margin: 0; 
-    flex: 0 0 auto; 
+    margin: 0;
+    flex: 0 0 auto;
+}
+
+.add-course-button {
+    align-items: center;
+    justify-content: center;
+    gap: 8px; 
+    flex: 1;
+    margin-right: 10px;
+    padding: 12px 24px;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    color: #fff;
+    background: linear-gradient(135deg, rgba(5, 23, 180, 0.9), rgba(0, 102, 255, 0.9));
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.add-course-button mat-icon {
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+.add-course-button:hover {
+    background: linear-gradient(135deg, rgba(0, 102, 255, 1), rgba(5, 23, 180, 1));
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.add-course-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(0, 102, 255, 0.5);
+}
+
+.add-course-button:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 }

@@ -1,9 +1,7 @@
 .profile-container {
     display: flex;
     flex-direction: column;
-    /* Stack items vertically */
     align-items: center;
-    /* Center horizontally */
     padding: 20px;
 }
 
@@ -11,20 +9,16 @@
     width: 100%;
     max-width: 600px;
     margin-bottom: 20px;
-    /* Adds space between the profile card and the enrollment list */
 }
 
 .profile-icon {
-    color: #d32f2f;
-    /* Rose Red for profile icon */
+    color: #322fd3;
 }
 
 .enrollment-list-container {
     display: flex;
     flex-direction: column;
-    /* Stack the items vertically */
     align-items: center;
-    /* Center items horizontally */
     width: 100%;
     max-width: 600px;
 }
@@ -32,7 +26,6 @@
 .enrollment-card-item {
     width: 100%;
     margin-bottom: 20px;
-    /* Space between each enrollment card */
 }
 
 .enrollment-card {

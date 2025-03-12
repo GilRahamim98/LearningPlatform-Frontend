@@ -1,7 +1,20 @@
-
-html, body {
+html,
+body {
     text-align: center;
     height: 100%;
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.mat-mdc-snack-bar-container.error-snackbar {
+    --mdc-snackbar-container-color: #dd1f1f;
+    --mat-mdc-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+}
+
+.mat-mdc-snack-bar-container.success-snackbar {
+    --mdc-snackbar-container-color: #22b333;
+    --mat-mdc-snack-bar-button-color: #000000;
+    --mdc-snackbar-supporting-text-color: #fff;
+}
+

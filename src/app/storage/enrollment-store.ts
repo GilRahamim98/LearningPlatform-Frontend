@@ -1,6 +1,8 @@
 import { patchState, signalStore, withComputed, withMethods, withState } from "@ngrx/signals";
 import { CourseModel } from "../models/course.model";
 import { EnrollmentModel } from "../models/enrollment.model";
+import { environment } from "../../environments/environment";
+import { withDevtools } from "@angular-architects/ngrx-toolkit";
 
 export type EnrollmentState = {
     enrollments: EnrollmentModel[];
@@ -28,6 +30,7 @@ export const EnrollmentStore = signalStore(
         }
     })),
 
+    environment.isDevelopment && withDevtools("EnrollmentStore")
 
 
 )

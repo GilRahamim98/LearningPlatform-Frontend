@@ -1,82 +1,60 @@
-/* Centered card container */
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50vh;
+    height: 85vh;
 }
 
-/* Card Styling */
 .login-card {
     width: 100%;
-    max-width: 400px;
+    max-width: 420px;
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     background: white;
-    border: 2px solid #d32f2f; /* Rose Red border */
+    border: 2px solid #342fd3;
 }
 
-/* Form Title */
 h2 {
     text-align: center;
-    color: #d32f2f; /* Rose Red */
-    font-size: 24px;
+    color: #2f37d3;
     margin-bottom: 1.5rem;
     font-weight: bold;
 }
 
-/* Full-width form fields */
 .full-width {
     width: 100%;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.5rem;
 }
 
-/* Input Field Styling */
-.mat-form-field-appearance-outline .mat-form-field-outline {
-    color: #e91e63; /* Soft Rose */
-}
-
-.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
-    color: #d32f2f; /* Darker Rose on focus */
-}
-
-.mat-form-field.mat-focused .mat-form-field-label {
-    color: #d32f2f !important;
-}
-
-input.mat-input-element {
-    color: #d32f2f;
-}
-
-.mat-error {
-    color: #e91e63; /* Soft Rose for errors */
-    font-size: 13px;
-}
-
-/* Button Styling */
-button {
-    background-color: #e91e63; /* Soft Rose */
+button.login-button{
+    background-color: #342fd3;
     color: white;
     font-weight: bold;
-    padding: 10px;
-    border-radius: 8px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 30px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-button:hover {
-    background-color: #d81b60; /* Darker rose-red on hover */
-    transform: translateY(-2px); /* Slight lift */
+button.login-button:hover {
+    background-color: #2118c2;
+    transform: scale(1.05);
 }
 
-/* Button Disabled State */
 button[disabled] {
-    background-color: #f8bbd0; /* Light Rose for disabled */
-    color: #fff;
+    background-color: #bbc1f8; 
+    color: #ffffffa1; 
+    cursor: not-allowed;
+}
+.mat-form-field-appearance-outline .mat-form-field-outline {
+    color: #2f37d3;
 }
 
-/* Error message transition */
-.mat-error {
-    transition: opacity 0.3s ease-in-out;
+.mat-form-field.mat-focused .mat-form-field-outline-thick {
+    color: #0014f5;
 }
+
+
+
+

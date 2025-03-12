@@ -1,0 +1,58 @@
+<div class="add-course-container">
+    <mat-card class="add-course-card">
+        @if(course){
+        <h2>Edit Course</h2>
+        }@else {
+        <h2>Add New Course</h2>
+        }
+        <form [formGroup]="courseForm" (ngSubmit)="isEdit?openEditDialog():addCourse()" *ngIf="courseForm">
+            <mat-card-content>
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Title</mat-label>
+                    <input matInput formControlName="titleControl" placeholder="Enter course title">
+                    <mat-error *ngIf="courseForm.get('titleControl')?.hasError('required')">
+                        Title is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput formControlName="descriptionControl"
+                        placeholder="Enter course description"></textarea>
+                    <mat-error *ngIf="courseForm.get('descriptionControl')?.hasError('required')">
+                        Description is required
+                    </mat-error>
+                </mat-form-field>
+
+            </mat-card-content>
+
+            <mat-card-actions class="add-course-actions">
+                <button mat-raised-button type="button" (click)="addLesson()">Add Lesson</button>
+                @if(isEdit){
+                    <button mat-raised-button color="primary" class="add-course-button" type="submit"
+                    [disabled]="courseForm.invalid">
+                    Edit Course
+                </button>
+                }@else {
+                <button mat-raised-button color="primary" class="add-course-button" type="submit"
+                    [disabled]="courseForm.invalid">
+                    Add Course
+                </button>
+                }
+            </mat-card-actions>
+
+            <div formArrayName="lessons" class="lesson-container">
+                <div *ngFor="let lesson of lessons.controls; let i = index" [formGroupName]="i">
+                    <mat-card class="lesson-card">
+                        <mat-card-content>
+                            <app-add-lesson [lessonForm]="$any(lesson)"></app-add-lesson>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-button type="button" (click)="removeLesson(i)">Remove Lesson</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+        </form>
+    </mat-card>
+</div>

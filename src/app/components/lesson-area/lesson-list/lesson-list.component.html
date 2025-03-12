@@ -1,0 +1,15 @@
+@if(lessons().length === 0) {
+    <div class="no-lessons">
+        <h2>No lessons found</h2>
+        <p>There are no lessons available for this course.</p>
+    </div>
+} @else {
+    <div class="lessons-container">
+        <h2 class="lessons-title">Lessons</h2>
+        <div class="lessons-grid">
+            @for (l of lessons(); track l.id) {
+                <app-lesson-card [lesson]="l" />
+            }
+        </div>
+    </div>
+}  

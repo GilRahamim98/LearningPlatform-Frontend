@@ -1,4 +1,3 @@
-/* Centered card container */
 .register-container {
     display: flex;
     justify-content: center;
@@ -8,42 +7,68 @@
 
 .register-card {
     width: 100%;
-    max-width: 400px;
+    max-width: 420px;
     padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
     background: white;
+    border: 2px solid #342fd3;
 }
 
-/* Form Title */
 h2 {
     text-align: center;
-    color: #d32f2f; /* Rose Red color */
-    margin-bottom: 1rem;
-}
-
-/* Full-width form fields */
-.full-width {
-    width: 100%;
-    margin-bottom: 1rem;
-}
-
-/* Button Styling */
-button {
-    background-color: #d32f2f; /* Rose Red color for button */
-    color: white;
+    color: #2f37d3;
+    margin-bottom: 1.5rem;
     font-weight: bold;
 }
 
-button:hover {
-    background-color: #c2185b; /* Darker shade of Rose Red on hover */
+.full-width {
+    width: 100%;
+    margin-bottom: 1.5rem;
 }
 
-/* Input field styling */
+button.register-button {
+    background-color: #342fd3;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 30px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button.register-button:hover {
+    background-color: #2118c2;
+    transform: scale(1.05);
+}
+
+button[disabled] {
+    background-color: #bbc1f8; 
+    color: #ffffffa1; 
+    cursor: not-allowed;
+}
+
 .mat-form-field-appearance-outline .mat-form-field-outline {
-    color: #d32f2f; /* Rose Red for outline */
+    color: #2f37d3;
 }
 
 .mat-form-field.mat-focused .mat-form-field-outline-thick {
-    color: #f50057; /* Lighter rose red for focused input fields */
+    color: #0014f5;
 }
+
+.role-label {
+    font-weight: bold;
+    color: #2f37d3;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.role-group {
+    margin-bottom: 1.5rem;
+    border-radius: 7px;
+}
+
+mat-radio-button {
+    color: #2f3fd3;
+}
+

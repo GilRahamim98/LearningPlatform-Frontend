@@ -14,6 +14,7 @@ import { Progress } from '../utils/types';
 import { CreateProgressModel } from '../models/createProgress.model';
 import { EnrollmentModel } from '../models/enrollment.model';
 import { CourseService } from './course.service';
+import { ProgressStore } from '../storage/progress-store';
 
 @Injectable({
     providedIn: 'root'
@@ -24,6 +25,7 @@ export class UserService {
     private courseService = inject(CourseService);
     private userStore = inject(UserStore);
     private enrollmentStore = inject(EnrollmentStore);
+    private progressStore = inject(ProgressStore);
     private lessonService = inject(LessonService);
 
     public constructor() {
@@ -32,7 +34,10 @@ export class UserService {
         const payload = jwtDecode<{ user: string }>(token);
         const dbUser = JSON.parse(payload.user);
         this.userStore.initUser(dbUser);
-        this.getStudentEnrollments(this.userStore.user()?.id);
+        if (this.userStore.RoleName() === "Student") {
+            this.getStudentEnrollments(this.userStore.user()?.id);
+            this.getStudentProgress(this.userStore.user()?.id);
+        }
     }
 
     public async register(user: CreateUserModel): Promise<void> {
@@ -52,24 +57,30 @@ export class UserService {
         const dbUser = JSON.parse(payload.user);
         this.userStore.initUser(dbUser);
         this.getStudentEnrollments(this.userStore.user()?.id);
+        this.getStudentProgress(this.userStore.user()?.id);
         localStorage.setItem("token", token);
     }
 
     public logout(): void {
         this.userStore.logoutUser();
         this.enrollmentStore.clearEnrollment();
+        this.progressStore.clearProgresses();
         localStorage.removeItem("token");
     }
 
     public async enrollStudent(enrollment: EnrollmentModel): Promise<void> {
         const dbEnrollment$ = this.http.post<EnrollmentModel>(environment.usersUrl + "enroll-to-course", enrollment);
         const dbEnrollment = await firstValueFrom(dbEnrollment$);
-        console.log(dbEnrollment);
+        this.enrollmentStore.addEnrollment(dbEnrollment);
     }
 
     public async unenrollStudent(enrollmentId: string): Promise<void> {
         const dbEnrollment$ = this.http.delete<void>(environment.usersUrl + `unenroll/${enrollmentId}`);
-        const dbEnrollment = await firstValueFrom(dbEnrollment$);
+        await firstValueFrom(dbEnrollment$);
+        const courseId = this.enrollmentStore.enrollments().find(e => e.id === enrollmentId).courseId;
+        const courseLessons = await this.lessonService.getLessonsByCourse(courseId);
+        this.progressStore.initProgresses(this.progressStore.progresses().filter(p => !courseLessons.some(l => l.id === p.lessonId)));
+        this.enrollmentStore.deleteEnrollment(enrollmentId);
     }
 
     public async getStudentEnrollments(studentId: string): Promise<EnrollmentModel[]> {
@@ -80,34 +91,26 @@ export class UserService {
         return enrollments;
     }
 
-    public async getEnrollmentByCourse(courseId:string):Promise<EnrollmentModel>{
-        return await this.enrollmentStore.enrollments().filter(e=>e.courseId === courseId)[0];
+    public async getEnrollmentByCourse(courseId: string): Promise<EnrollmentModel> {
+        return await this.enrollmentStore.enrollments().filter(e => e.courseId === courseId)[0];
     }
 
     public async getStudentCourses(studentId: string): Promise<CourseModel[]> {
-        let enrollments;
-        if (this.enrollmentStore.enrollments()?.length > 0)
-            enrollments = this.enrollmentStore.enrollments();
-        else {
-            const enrollments$ = this.http.get<EnrollmentModel[]>(environment.usersUrl + `enrollments/${studentId}`);
-            enrollments = await firstValueFrom(enrollments$);
-        }
-        
+        const enrollments = await this.getStudentEnrollments(studentId);
         const courses = (await this.courseService.getAllCourses()).filter(c => enrollments.some(e => e.courseId === c.id));
         return courses;
     }
 
     public async getStudentProgress(studentId: string): Promise<ProgressModel[]> {
+        if (this.progressStore.progresses()?.length > 0) return this.progressStore.progresses();
         const progresses$ = this.http.get<ProgressModel[]>(environment.usersUrl + `progress-by-user/${studentId}`);
         const progresses = await firstValueFrom(progresses$);
-
+        this.progressStore.initProgresses(progresses);
         return progresses;
     }
 
     public async getStudentProgressInCourse(studentId: string, courseId: string): Promise<Progress> {
-        const progresses$ = this.http.get<ProgressModel[]>(environment.usersUrl + `progress-by-user/${studentId}`);
-        const progresses = await firstValueFrom(progresses$);
-
+        const progresses = await this.getStudentProgress(studentId);
         const lessons = await this.lessonService.getLessonsByCourse(courseId);
         const watchedLessons = lessons.filter(l => progresses.some(p => p.lessonId == l.id));
         const progress = new Progress();
@@ -120,5 +123,14 @@ export class UserService {
     public async watchLesson(createProgress: CreateProgressModel): Promise<void> {
         const progress$ = this.http.post<ProgressModel>(environment.usersUrl + "progresses", createProgress);
         const progress = await firstValueFrom(progress$);
+        this.progressStore.addProgress(progress);
+    }
+
+    public isEnrolled(courseId: string): boolean {
+        return this.enrollmentStore.enrollments()?.some(e => e.courseId === courseId);
+    }
+
+    public getUserRoleName():string{
+        return this.userStore.RoleName();
     }
 }

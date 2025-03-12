@@ -1,6 +1,9 @@
 <h1>Our Courses</h1>
+@if(userStore.user() && userStore.RoleName() === 'Instructor') {
+    <button mat-raised-button class="add-course-button" (click)="addCourse()"> <mat-icon>add_circle</mat-icon> Add Course</button>
+}
 <div class="course-list-container">
-    @for (c of courses; track c.id) {
-        <app-course-card [course]="c" class="course-card-item"/>
+    @for (c of courses(); track c.id) {
+        <app-course-card [course]="c" class="course-card-item" (deletedCourse)="handleDeletedCourse($event)"/>
     }
 </div>

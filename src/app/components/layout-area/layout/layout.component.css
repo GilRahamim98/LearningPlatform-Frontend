@@ -2,6 +2,10 @@ div{
     height: 100%;
     box-sizing: border-box;
     display: grid;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: 0.3fr 3fr 0.25fr;
+}
+main{
+    background: #f8f8f8;
+
 }
 

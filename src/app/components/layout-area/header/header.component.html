@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-    <div class="logo">
+    <div class="logo" routerLink="/home">
             <app-logo />
             <span class="mat-title">AcademiaX</span>
     </div>
@@ -15,8 +15,8 @@
         @if(userStore.user()){
         <button mat-button [matMenuTriggerFor]="menu">{{userStore.user().name}}</button>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item routerLink="/profile">My Profile</button>
-            <button mat-menu-item routerLink="/home" (click)="logout()">Logout</button>
+            <a mat-menu-item routerLink="/profile">My Profile</a>
+            <a mat-menu-item routerLink="/home" (click)="logout()">Logout</a>
         </mat-menu>
         }@else{
         <button mat-raised-button color="accent" routerLink="/login">Login</button>

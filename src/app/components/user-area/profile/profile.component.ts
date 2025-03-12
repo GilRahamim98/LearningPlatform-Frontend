@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { UserModel } from '../../../models/user.model';
 import { UserStore } from '../../../storage/user-store';
 import { EnrollmentStore } from '../../../storage/enrollment-store';
-import { EnrollmentListComponent } from "../enrollment-list/enrollment-list.component";
+import { EnrollmentListComponent } from '../../enrollment-area/enrollment-list/enrollment-list.component';
 
 @Component({
   selector: 'app-profile',

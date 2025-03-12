@@ -1,90 +1,116 @@
 .course-card {
     width: 100%;
-    max-width: 350px;  
-    height: 300px;     
-    margin: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 380px;
+    height: 320px;
+    margin: 20px;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow: hidden;
-  }
-  
-/* Title Styling */
-.mat-card-title {
-    font-weight: bold;
-    color: #d32f2f; /* Rose Red title */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
 }
 
-/* Content Styling */
-.mat-card-content {
-    font-size: 16px;
-    color: #333;
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
 }
 
-/* Button Row Styling */
-.example-button-row {
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+mat-card-title {
+    font-weight: 800;
+    color: #2f2fd3;
+    font-size: 1.5rem;
+    padding: 10px;
+}
+
+mat-card-content p {
+    font-size: 1rem;
+    color: #555;
+}
+
+mat-card-actions{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.button-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
     gap: 10px;
 }
 
-/* Button Styling */
-button {
-    margin-right: 10px;
+.action-button {
+    border-radius: 25px;
+    padding: 8px 20px;
     font-weight: bold;
-    border-radius: 20px;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Enroll Button Styling */
 .enroll-button {
-    background-color: #d32f2f; /* Rose Red button background */
+    background-color: #2f3dd3;
     color: white;
 }
 
 .enroll-button:hover {
-    background-color: #c2185b; /* Darker Rose Red on hover */
-    transform: scale(1.05); /* Slightly enlarge the button on hover */
+    background-color: #2740b3;
+    transform: scale(1.1);
 }
 
-/* See More Button Styling */
-.see-more-button {
-    background-color: #d32f2f; /* Rose Red background */
+.enrolled-button {
+    background-color: #1e7b1e;
     color: white;
 }
 
-.see-more-button:hover {
-    background-color: #c2185b; /* Darker Rose Red on hover */
-    transform: scale(1.05); /* Slightly enlarge the button on hover */
+.edit-button, .see-more-button {
+    background-color: #2f3dd3;
+    color: white;
 }
 
-
-/* Flex Container for Buttons */
-.example-flex-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+.edit-button:hover, .see-more-button:hover {
+    background-color: #2740b3;
+    transform: scale(1.1);
 }
 
-/* Button Container */
-.example-button-container {
+.delete-button {
+    background-color: #e53935;
+    color: white;
+    position: absolute;
+    top: 0px; 
+    right: 0px; 
+    height: 25px; 
+    padding: 0;
+    min-width: 25px;
     display: flex;
     justify-content: center;
-    width: 140px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border: none; 
+    cursor: pointer;
+    border-radius: 0 0 0 5px;
 }
-.example-button-container center{
-    justify-content: center;
 
+.delete-button:hover {
+    background-color: #c62828;
+    transform: scale(1.1);
 }
 
-/* Responsive Styling for Smaller Screens */
-@media screen and (max-width: 768px) {
-    /* On smaller screens, allow cards to take up full width */
-    .course-card {
-        width: 100%;
-        max-width: 100%; /* Ensures the card takes full width */
-    }
+.delete-button mat-icon { 
+    object-fit: contain;
+    margin: 0;
+}
+
+
+mat-icon {
+    font-size: 17px !important;
+    color: white;
 }

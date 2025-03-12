@@ -22,7 +22,7 @@ export const UserStore = signalStore(
         }
     })),
     withComputed(store => ({
-        RoleName: computed(() => store.user()?.roleId === 3 ? "Admin" : store.user()?.roleId === 1 ? "Student" : "Instructor")
+        RoleName: computed(() => store.user()?.roleId === 3 ? "Admin" : store.user()?.roleId === 1 ? "Student" : store.user()?.roleId === 2 ? "Instructor" : "Unknown")
     })),
 
 )

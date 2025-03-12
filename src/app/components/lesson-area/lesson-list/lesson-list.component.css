@@ -1,0 +1,20 @@
+.lessons-container {
+    margin-top: 3rem;
+    padding: 2rem;
+    text-align: center;
+}
+
+.lessons-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #4035db; 
+    margin-bottom: 1.5rem;
+}
+
+.lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    padding: 0 2rem;
+}

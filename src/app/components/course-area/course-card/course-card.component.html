@@ -1,6 +1,11 @@
 <mat-card class="course-card" appearance="outlined">
-    <mat-card-header>
+    <mat-card-header class="card-header">
         <mat-card-title>{{course.title}}</mat-card-title>
+        @if(userStore.RoleName() === 'Instructor'){
+        <button mat-raised-button color="primary" class="delete-button" (click)="openDeleteDialog()">
+            <mat-icon>close</mat-icon>
+        </button>
+        }
     </mat-card-header>
 
     <mat-card-content>
@@ -8,24 +13,27 @@
     </mat-card-content>
 
     <mat-card-actions>
-        <div class="example-button-row" >
-            <div class="example-flex-container">
-                <div class="example-button-container" *ngIf="userStore.RoleName() === 'Student' ">
-                    @if(!isEnrolled){
-                        <button mat-raised-button color="accent" class="enroll-button" (click)="enrollStudent()" >
-                            Enroll
-                        </button>
-                    }@else{
-                        <span>You already enrolled!</span>
-                    }
-                   
-                </div>
-                <div class="example-button-container" [ngClass]="{'center' :!isEnrolled}">
-                    <button mat-raised-button color="primary" class="see-more-button" (click)="displayDetails(course.id)">
-                        See more
-                    </button>
-                </div>
-            </div>
+        <div class="button-row">
+            @if(userStore.RoleName() === 'Student'){
+            @if(!isEnrolled){
+            <button mat-raised-button color="accent" class="enroll-button" (click)="enrollStudent()">
+                Enroll
+            </button>
+            }@else{
+            <button mat-raised-button class="enrolled-button" [disabled]="true">
+                <mat-icon>check</mat-icon>
+                Enrolled
+            </button>
+            }
+            }
+            @if(userStore.RoleName() === 'Instructor'){
+            <button mat-raised-button color="primary" class="see-more-button" (click)="editCourse()">
+                Edit
+            </button>
+            }
+            <button mat-raised-button color="primary" class="see-more-button" (click)="displayDetails()">
+                See more
+            </button>
         </div>
     </mat-card-actions>
 </mat-card>

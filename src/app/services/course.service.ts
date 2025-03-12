@@ -23,8 +23,8 @@ export class CourseService {
     }
 
 
-    public async getOneCourse(id: string): Promise<CourseModel> {
-        const course = this.courseStore.courses().find(c => c.id === id);
+    public async getCourseById(id: string): Promise<CourseModel> {
+        const course = this.courseStore.courses()?.find(c => c.id === id);
         if (course) return course;
 
         const course$ = this.http.get<CourseModel>(environment.coursesUrl + id);
@@ -32,17 +32,19 @@ export class CourseService {
         return dbCourse;
     }
 
-    public async addCourse(course: CourseModel): Promise<void> {
+    public async addCourse(course: CourseModel): Promise<CourseModel> {
         const dbCourse$ = this.http.post<CourseModel>(environment.coursesUrl,course);
         const dbCourse = await firstValueFrom(dbCourse$);
         this.courseStore.addCourse(dbCourse);
+        return dbCourse;
     }
 
-    public async updateProduct(course: CourseModel): Promise<void> {
+    public async updateCourse(course: CourseModel): Promise<CourseModel> {
 
         const dbCourse$ = this.http.put<CourseModel>(environment.coursesUrl + course.id, course);
         const dbCourse = await firstValueFrom(dbCourse$);
         this.courseStore.updateCourse(dbCourse);
+        return dbCourse;
     }
 
     public async deleteCourse(id: string): Promise<void> {

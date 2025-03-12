@@ -6,17 +6,23 @@
     </mat-card-header>
   
     <mat-card-content>
-        @if(isWatched){
-            <span>You already watched this lesson...</span>
+        @if(isWatched()){
+            <span>You already watched this lesson at {{progress()?.watchedAt | date:'mediumDate'}}</span>
         }
     </mat-card-content>
   
     @if(userStore.user()){
         <mat-card-actions >
-            <button mat-raised-button color="accent" (click)="openVideo()">Watch Lesson</button>
+            @if(isWatched()){
+                <button mat-raised-button (click)="openVideo()">Watch Again</button>
+            }@else if(isEnrolled) {
+                <button mat-raised-button (click)="watch()">Watch Lesson</button>
+            }@else {
+                <button mat-raised-button [disabled]=""><mat-icon>lock</mat-icon>Enroll To Watch</button>
+            }
           </mat-card-actions>
     }@else{
-        <button mat-raised-button class="flickering-button">
+        <button mat-raised-button class="flickering-button" routerLink="/login">
             Log in To Watch
           </button>
     }

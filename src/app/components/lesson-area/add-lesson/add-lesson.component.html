@@ -1,0 +1,20 @@
+<form [formGroup]="lessonForm" class="lesson-form">
+    <mat-card-content>
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="titleControl" placeholder="Enter lesson title">
+            <mat-error *ngIf="lessonForm.get('titleControl')?.invalid && lessonForm.get('titleControl')?.touched">
+                Title is required and should be at least 2 characters long.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Video URL</mat-label>
+            <input matInput formControlName="videoControl" placeholder="Enter lesson video url">
+            <mat-error *ngIf="lessonForm.get('videoControl')?.invalid && lessonForm.get('videoControl')?.touched">
+                Please enter a valid video URL.
+            </mat-error>
+        </mat-form-field>
+
+    </mat-card-content>
+</form>

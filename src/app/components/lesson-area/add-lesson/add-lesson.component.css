@@ -1,0 +1,61 @@
+.lesson-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    background-color: #f5f7fa;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.full-width {
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #4a5568;
+    margin-bottom: 6px;
+}
+
+.form-input {
+    padding: 10px 14px;
+    border: 1px solid #cbd5e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-input:focus {
+    border-color: #4c6cec;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(76, 108, 236, 0.2);
+}
+
+.error {
+    margin-top: 4px;
+    font-size: 0.875rem;
+    color: #e53e3e;
+}
+
+@media (max-width: 600px) {
+    .lesson-form {
+        padding: 12px;
+    }
+
+    .form-label {
+        font-size: 0.9rem;
+    }
+
+    .form-input {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
+}

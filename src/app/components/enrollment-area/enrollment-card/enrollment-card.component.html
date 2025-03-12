@@ -6,10 +6,9 @@
     <mat-card class="progress-card">
         <mat-card-content>
             <h2 class="progress-title">Progress:</h2>
-            <section class="example-section">
+            <section class="progress-section">
                 <div>
-                    <mat-progress-spinner class="background-spinner" [mode]="mode"
-                        [value]=100></mat-progress-spinner>
+                    <mat-progress-spinner class="background-spinner" [mode]="mode" [value]=100></mat-progress-spinner>
                     <mat-progress-spinner [mode]="mode" [value]="value"></mat-progress-spinner>
                     <div style="position:relative; top: -60px; ">{{value}}%</div>
                 </div>
@@ -18,8 +17,9 @@
         </mat-card-content>
 
         <mat-card-actions>
-            <button mat-raised-button color="accent" (click)="viewCourseDetails(course.id)">View Course</button>
-            <button mat-raised-button color="accent" (click)="unenroll()">Unenroll</button>
+            <button mat-raised-button (click)="viewCourseDetails(course.id)">View Course</button>
+            <button *ngIf="value!==100" mat-raised-button class="unenroll-button" (click)="openUnenrollDialog()">Unenroll</button>
+            <button *ngIf="value===100" mat-raised-button (click)="congrats()">Congrats</button>
         </mat-card-actions>
     </mat-card>
 </mat-card>

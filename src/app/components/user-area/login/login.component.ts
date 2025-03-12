@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CredentialsModel } from '../../../models/credentials.model';
 import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
@@ -8,39 +8,47 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
-  selector: 'app-login',
-  imports: [ReactiveFormsModule, CommonModule, MatInputModule, MatButtonModule, MatFormFieldModule, MatCardModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+    selector: 'app-login',
+    imports: [ReactiveFormsModule, CommonModule, MatInputModule, MatButtonModule, MatFormFieldModule, MatCardModule],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
 
     private credentials = new CredentialsModel();
-    public credentialsForm :FormGroup;
+    public credentialsForm: FormGroup;
+    private horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+    private verticalPosition: MatSnackBarVerticalPosition = 'top';
 
     public constructor(
-        private userService:UserService,
-        private router:Router,
-        private formBuilder:FormBuilder
+        private userService: UserService,
+        private router: Router,
+        private formBuilder: FormBuilder,
+        private notificationService: NotificationService
     ){}
 
-    public ngOnInit():void{
+    public ngOnInit(): void {
         this.credentialsForm = this.formBuilder.group({
-            emailControl: new FormControl(""),
-            passwordControl :new FormControl("")
+            emailControl: new FormControl("", [Validators.required, Validators.maxLength(100), Validators.email]),
+            passwordControl: new FormControl("", [Validators.required, Validators.minLength(8), Validators.maxLength(100)])
         });
     }
 
-    public async send(){
+    public async send() {
         try {
             this.credentials.email = this.credentialsForm.get("emailControl").value;
             this.credentials.password = this.credentialsForm.get("passwordControl").value;
             await this.userService.login(this.credentials);
+            this.notificationService.success("Welcome Back!");
+         
             this.router.navigateByUrl("/home");
-        }catch(err:any){
-            console.log(err.error);
+        } catch (err: any) {
+            this.notificationService.error(JSON.parse(err.error)?.errors);         
+          
         }
     }
 

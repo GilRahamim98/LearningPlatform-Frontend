@@ -1,51 +1,36 @@
-/* General Link Styles */
 a {
-    color: #d32f2f; /* Rose Red for links */
     text-decoration: none;
 }
 
-a:hover {
-    color: #c2185b; /* Darker shade of rose red on hover */
-}
-
 .mat-title {
-    color: #d32f2f;
+    color: #2f37d3;
     font-size: 24px;
     font-weight: bold;
-    margin-left: 15px; /* Increased space between the logo and text */
+    margin-left: 15px; 
 }
 
-/* Toolbar Spacer */
 .spacer {
     flex: 1 1 auto;
 }
 
-/* Navigation Links */
 nav a {
     margin-right: 20px;
     font-weight: 500;
 }
 
-/* Default Button Styling */
 button {
+    background-color: #25a0dd; 
     margin-left: 20px;
-    background-color: #d32f2f;
     color: white;
     padding: 8px 16px;
     border-radius: 8px;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-button:hover {
-    background-color: #c2185b;
-    transform: translateY(-2px); /* Slight lift on hover */
-}
-
-/* Login & Register Button Specific Styling */
 button[routerLink="/login"],
 button[routerLink="/register"] {
-    background-color: #e91e63; /* Rose shade */
-    border: 2px solid #d32f2f;
+    background-color: #2528dd; 
+    border: 2px solid #2f71d3;
     color: white;
     font-weight: bold;
     padding: 8px 20px;
@@ -55,26 +40,28 @@ button[routerLink="/register"] {
 
 button[routerLink="/login"]:hover,
 button[routerLink="/register"]:hover {
-    background-color: #d81b60; /* Darker rose-red on hover */
-    border-color: #c2185b;
-    transform: translateY(-2px) scale(1.02); /* Slight pop effect */
+    background-color: #371bd8; 
+    border-color: #1884c2;
+    transform: translateY(-2px) scale(1.02); 
 }
 
-/* Toolbar Background */
 mat-toolbar {
     background-color: white;
 }
 
-/* Align the logo and title next to each other */
+
 .logo {
     display: flex;
     align-items: center;
 }
 
+.logo :hover{
+    cursor: pointer;
+}
 
 .logo .mat-title {
     font-size: 24px;
-    color: #d32f2f;
+    color: #280ef3;
     font-weight: bold;
-    margin-left: 15px; /* Increased space between the logo and text */
+    margin-left: 15px; 
 }
