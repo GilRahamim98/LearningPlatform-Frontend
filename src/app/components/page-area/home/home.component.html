@@ -1,33 +1,59 @@
-<mat-card class="home-card">
-    <mat-card-header>
-      <mat-card-title>Welcome to Our Online Learning Platform</mat-card-title>
-    </mat-card-header>
-    
-    <mat-card-content>
-      <p class="intro-text">
-        Learn at your own pace with our expert-led courses. Explore a variety of subjects including 
-        programming, business, design, and more.
-      </p>
-  
-      <h3 class="section-heading">Why Choose Us?</h3>
-      <ul class="feature-list">
-        <li>High-quality courses from experienced instructors</li>
-        <li>Learn anytime, anywhere</li>
-        <li>Track your progress with detailed analytics</li>
-      </ul>
-  
-      <h3 class="section-heading">Popular Courses</h3>
-      <mat-list class="course-list">
-        <mat-list-item>Introduction to C#</mat-list-item>
-        <mat-list-item>Advanced Angular Development</mat-list-item>
-        <mat-list-item>Database Management with SQL</mat-list-item>
-        <mat-list-item>Building REST APIs with .NET</mat-list-item>
-      </mat-list>
-  
-      <h3 class="section-heading">Get Started Today!</h3>
-      <p>
-        Sign up to access hundreds of free and premium courses designed to help you achieve your learning goals.
-      </p>
-    </mat-card-content>
-  </mat-card>
-  
+<div class="container">
+    <div class="left-section">
+        <div class="hero-section">
+            <h1 class="title">
+                <span class="highlight">AcademiaX</span>
+            </h1>
+            <p class="description">
+                Learning is the key that unlocks endless possibilities - every new skill and idea shapes the future
+                you're
+                building today. </p>
+        </div>
+
+    </div>
+
+    <div class="right-section">
+        <div class="columns-section">
+            <mat-card class="task-card">
+                <mat-card-title>About Us</mat-card-title>
+                <p>At AcademiaX, we offer high-quality online courses to help you learn new skills and grow. Join our
+                    community and take control of your learning journey today!</p>
+            </mat-card>
+            <img mat-card-image src="assets/images/pc.jpg" alt="pc" />
+        </div>
+
+        <button mat-raised-button color="primary" routerLink="/courses">Discover Courses</button>
+        <h2>Recommendations:</h2>
+        <div class="recommend-section">
+            <mat-card class="recommend-card">
+                <mat-card-title>Incredible Learning Experience!</mat-card-title>
+                <div class="star-section">
+                   ⭐⭐⭐⭐⭐
+                </div>
+                <p>"AcademiaX has completely transformed the way I learn. The courses are engaging, and the instructors are
+                    knowledgeable. I highly recommend it to anyone looking to expand their skills!"
+                    - Sarah T., Data Science Student</p>
+            </mat-card>
+            <mat-card class="recommend-card">
+                <mat-card-title>Boosted My Career!</mat-card-title>
+                <div class="star-section">
+                    ⭐⭐⭐⭐⭐
+                 </div>
+                <p>"Thanks to AcademiaX, I was able to gain the skills I needed to land my dream job. The hands-on approach
+                    and clear explanations really made a difference."
+                    - James L., Software Engineer</p>
+            </mat-card>
+            <mat-card class="recommend-card">
+                <mat-card-title>Flexible and Convenient!</mat-card-title>
+                <div class="star-section">
+                    ⭐⭐⭐⭐⭐
+                 </div>
+                <p>"The flexibility to learn at my own pace has been a game-changer. I can fit my studies around my busy
+                    schedule, making learning so much easier."
+                    - Emily R., Business Management Student</p>
+            </mat-card>
+        </div>  
+    </div>
+
+
+</div>

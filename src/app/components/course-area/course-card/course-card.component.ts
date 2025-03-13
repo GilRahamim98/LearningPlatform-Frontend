@@ -73,7 +73,7 @@ export class CourseCardComponent implements OnInit {
 
     public openDeleteDialog(): void {
         const dialogRef = this.dialog.open(DeleteCourseDialogComponent, {
-            width: '500px',
+            width: '250px',
             height: '200px',
             enterAnimationDuration: '0ms',
             exitAnimationDuration: '0ms',

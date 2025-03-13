@@ -1,5 +1,6 @@
 <div class="add-course-container">
     <mat-card class="add-course-card">
+        <mat-icon class="go-back" (click)="openGoBackDialog()">keyboard_backspace</mat-icon>
         @if(course){
         <h2>Edit Course</h2>
         }@else {
@@ -13,6 +14,12 @@
                     <mat-error *ngIf="courseForm.get('titleControl')?.hasError('required')">
                         Title is required
                     </mat-error>
+                    <mat-error *ngIf="courseForm.get('titleControl')?.hasError('minlength')">
+                        Title must be at least 2 characters
+                    </mat-error>
+                    <mat-error *ngIf="courseForm.get('titleControl')?.hasError('maxlength')">
+                        Title must be at most 50 characters long
+                    </mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="full-width">
@@ -22,12 +29,18 @@
                     <mat-error *ngIf="courseForm.get('descriptionControl')?.hasError('required')">
                         Description is required
                     </mat-error>
+                    <mat-error *ngIf="courseForm.get('descriptionControl')?.hasError('minlength')">
+                        Description must be at least 2 characters
+                    </mat-error>
+                    <mat-error *ngIf="courseForm.get('descriptionControl')?.hasError('maxlength')">
+                        Description must be at most 1000 characters long
+                    </mat-error>
                 </mat-form-field>
 
             </mat-card-content>
 
             <mat-card-actions class="add-course-actions">
-                <button mat-raised-button type="button" (click)="addLesson()">Add Lesson</button>
+                <button mat-raised-button type="button" class="add-lesson-button" (click)="addLesson()">Add Lesson</button>
                 @if(isEdit){
                     <button mat-raised-button color="primary" class="add-course-button" type="submit"
                     [disabled]="courseForm.invalid">
@@ -45,7 +58,7 @@
                 <div *ngFor="let lesson of lessons.controls; let i = index" [formGroupName]="i">
                     <mat-card class="lesson-card">
                         <mat-card-content>
-                            <app-add-lesson [lessonForm]="$any(lesson)"></app-add-lesson>
+                            <app-lesson-form [lessonForm]="$any(lesson)"></app-lesson-form>
                         </mat-card-content>
                         <mat-card-actions>
                             <button mat-button type="button" (click)="removeLesson(i)">Remove Lesson</button>

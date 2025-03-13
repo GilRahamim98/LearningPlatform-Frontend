@@ -15,7 +15,7 @@
         <mat-card-actions >
             @if(isWatched()){
                 <button mat-raised-button (click)="openVideo()">Watch Again</button>
-            }@else if(isEnrolled || userStore.RoleName() === 'Instructor' || userStore.RoleName() === 'Admin') {
+            }@else if(isEnrolled) {
                 <button mat-raised-button (click)="watch()">Watch Lesson</button>
             }@else if(userStore.RoleName() === 'Instructor' || userStore.RoleName() === 'Admin'){
                 <button mat-raised-button (click)="openVideo()">Watch Lesson</button>

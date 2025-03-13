@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
@@ -17,7 +17,8 @@ import { NotificationService } from '../../../services/notification.service';
     selector: 'app-register',
     imports: [ReactiveFormsModule, CommonModule, MatInputModule, MatButtonModule, MatFormFieldModule, MatCardModule, MatRadioModule, MatButtonToggleModule],
     templateUrl: './register.component.html',
-    styleUrl: './register.component.css'
+    styleUrl: './register.component.css',
+    changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class RegisterComponent implements OnInit {
 
@@ -35,7 +36,7 @@ export class RegisterComponent implements OnInit {
         this.userForm = this.formBuilder.group({
             nameControl: new FormControl("", [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
             emailControl: new FormControl("", [Validators.required, Validators.maxLength(100), Validators.email]),
-            passwordControl: new FormControl("", [Validators.required, Validators.minLength(8), Validators.maxLength(100), Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/)]),
+            passwordControl: new FormControl("", [Validators.required, Validators.minLength(8), Validators.maxLength(14), Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/)]),
             roleControl: new FormControl("", [Validators.required, Validators.min(1), Validators.max(2)])
         })
     }

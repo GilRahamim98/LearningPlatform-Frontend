@@ -1,34 +1,34 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { CourseService } from '../../../services/course.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NotificationService } from '../../../services/notification.service';
-import { AddLessonComponent } from '../../lesson-area/add-lesson/add-lesson.component';
 import { CourseModel } from '../../../models/course.model';
 import { LessonModel } from '../../../models/lesson.model';
+import { CourseService } from '../../../services/course.service';
 import { LessonService } from '../../../services/lesson.service';
-import { MatDialog } from '@angular/material/dialog';
+import { NotificationService } from '../../../services/notification.service';
 import { EditCourseDialogComponent } from '../../dialogs/course-dialogs/edit-course-dialog/edit-course-dialog.component';
+import { LessonFormComponent } from '../../lesson-area/lesson-form/lesson-form.component';
+import { MatIcon } from '@angular/material/icon';
+import { DiscardDialogComponent } from '../../dialogs/course-dialogs/discard-dialog/discard-dialog.component';
 
 @Component({
     selector: 'app-course-form',
-    imports: [CommonModule, ReactiveFormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, AddLessonComponent],
+    imports: [CommonModule, ReactiveFormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule,MatIcon, LessonFormComponent],
     templateUrl: './course-form.component.html',
-    styleUrl: './course-form.component.css'
+    styleUrl: './course-form.component.css',
+    changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class CourseFormComponent implements OnInit {
     public courseForm: FormGroup;
     public course: CourseModel;
     private originalLessons: LessonModel[] = [];
     public isEdit = false;
-
-
 
     public constructor(
         private formBuilder: FormBuilder,
@@ -37,7 +37,8 @@ export class CourseFormComponent implements OnInit {
         private lessonService: LessonService,
         private notificationService: NotificationService,
         readonly dialog: MatDialog,
-        private router: Router
+        private router: Router,
+        private cdr: ChangeDetectorRef
     ) { }
 
     public async ngOnInit() {
@@ -49,7 +50,7 @@ export class CourseFormComponent implements OnInit {
             const lessonForms = this.originalLessons.map((lesson: LessonModel) => this.formBuilder.group({
                 id: lesson.id,
                 titleControl: new FormControl(lesson.title, [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
-                videoControl: new FormControl(lesson.videoUrl, [Validators.required, Validators.pattern('https?://.+')])
+                videoControl: new FormControl(lesson.videoUrl, [Validators.required, Validators.pattern(/^(https?:\/\/)?(www\.)?([a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+)(\/[a-zA-Z0-9-._~:\/?#[\]@!$&'()*+,;=]*)?$/)])
             }));
 
             this.courseForm = this.formBuilder.group({
@@ -57,6 +58,8 @@ export class CourseFormComponent implements OnInit {
                 descriptionControl: new FormControl(this.course.description, [Validators.required, Validators.minLength(2), Validators.maxLength(1000)]),
                 lessons: this.formBuilder.array(lessonForms)
             });
+            this.cdr.markForCheck();
+
         } else {
             this.courseForm = this.formBuilder.group({
                 titleControl: new FormControl("", [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
@@ -74,7 +77,7 @@ export class CourseFormComponent implements OnInit {
         const lessonForm = this.formBuilder.group({
             id: new FormControl(undefined),
             titleControl: new FormControl("", [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
-            videoControl: new FormControl("", [Validators.required, Validators.pattern('https?://.+')]),
+            videoControl: new FormControl("", [Validators.required, Validators.pattern(/^(https?:\/\/)?(www\.)?([a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+)(\/[a-zA-Z0-9-._~:\/?#[\]@!$&'()*+,;=]*)?$/)]),
 
         });
         this.lessons.push(lessonForm);
@@ -173,6 +176,7 @@ export class CourseFormComponent implements OnInit {
     public openEditDialog(): void {
         const dialogRef = this.dialog.open(EditCourseDialogComponent, {
             width: '250px',
+            height: '200px',
             enterAnimationDuration: '0ms',
             exitAnimationDuration: '0ms',
         });
@@ -180,6 +184,21 @@ export class CourseFormComponent implements OnInit {
         dialogRef.afterClosed().subscribe(async (result) => {
             if (result) {
                 await this.editCourse();
+            }
+        });
+    }
+
+    public openGoBackDialog():void{
+        const dialogRef = this.dialog.open(DiscardDialogComponent, {
+            width: '250px',
+            height: '200px',
+            enterAnimationDuration: '0ms',
+            exitAnimationDuration: '0ms',
+        });
+
+        dialogRef.afterClosed().subscribe(async (result) => {
+            if (result) {
+                this.router.navigateByUrl('/courses');
             }
         });
     }

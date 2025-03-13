@@ -75,7 +75,7 @@ button[disabled] {
 }
 
 button[type="button"] {
-    background-color: #ff5c5c; /* Red button for Remove Lesson */
+    background-color: #ff5c5c; 
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 20px;
@@ -89,12 +89,38 @@ button[type="button"]:hover {
 }
 
 button.mat-raised-button {
-    margin-top: 1rem; /* Adds margin for the "Add Lesson" button */
+    margin-top: 1rem; 
 }
 
 .add-course-actions{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     margin-top: 1rem;
+    gap: 10%;
+}
+
+.add-lesson-button{
+    background-color: white !important ;
+    color: blue !important;
+    border:1px solid blue;
+}
+
+.add-lesson-button:hover {
+    background-color: white !important;
+    color: blue !important;
+
+}
+
+.go-back{
+    font-size: x-large;
+    cursor: pointer;
+    transition: font-size 0.3s ease, transform 0.3s ease;
+
+}
+
+.go-back:hover{
+    font-size:xx-large;
+    transform: scale(1.05);
+
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -18,6 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
     imports: [CommonModule, MatCardModule, MatProgressBarModule, MatProgressSpinnerModule],
     templateUrl: './enrollment-card.component.html',
     styleUrl: './enrollment-card.component.css',
+    changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class EnrollmentCardComponent implements OnInit {
 
@@ -26,12 +27,11 @@ export class EnrollmentCardComponent implements OnInit {
     private userService = inject(UserService);
     private router = inject(Router);
     private dialog = inject(MatDialog);
-
+    private cdr = inject(ChangeDetectorRef);
 
     public mode: ProgressSpinnerMode = 'determinate';
     public value = 0;
     public progress: Progress;
-
 
     @Output()
     public unenrolled = new EventEmitter<string>();
@@ -42,6 +42,7 @@ export class EnrollmentCardComponent implements OnInit {
     public async ngOnInit() {
         this.progress = await this.userService.getStudentProgressInCourse(this.userStore.user().id, this.course.id);
         this.value = (this.progress.total > 0) ? Math.round((this.progress.watched / this.progress.total) * 100) : 0;
+        this.cdr.markForCheck();
     }
 
     public async unenroll() {
@@ -53,6 +54,8 @@ export class EnrollmentCardComponent implements OnInit {
             this.notificationService.error("An error occurred while trying to unenroll from this course");
         }
     }
+
+
 
     public congrats() {
         const jsConfetti = new JSConfetti();
@@ -71,6 +74,7 @@ export class EnrollmentCardComponent implements OnInit {
     public openUnenrollDialog(): void {
         const dialogRef = this.dialog.open(UnenrollDialogComponent, {
             width: '250px',
+            height: '200px',
             enterAnimationDuration: '0ms',
             exitAnimationDuration: '0ms',
         });

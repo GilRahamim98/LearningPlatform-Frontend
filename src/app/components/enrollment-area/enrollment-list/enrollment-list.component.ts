@@ -10,6 +10,7 @@ import { CourseModel } from '../../../models/course.model';
   imports: [CommonModule,EnrollmentCardComponent],
   templateUrl: './enrollment-list.component.html',
   styleUrl: './enrollment-list.component.css',
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class EnrollmentListComponent implements OnInit {
     public courses = signal<CourseModel[]>([]);

@@ -1,6 +1,10 @@
 <div class="enrollment-list-container">
-    <div *ngFor="let course of courses()" class="enrollment-card-item">
-      <app-enrollment-card [course]="course" (unenrolled)="handleUnenrolled($event)"></app-enrollment-card>
-    </div>
+    @if(courses().length>0){
+        <div *ngFor="let course of courses()" class="enrollment-card-item">
+            <app-enrollment-card [course]="course" (unenrolled)="handleUnenrolled($event)"></app-enrollment-card>
+        </div>
+    }@else {
+        <h1>You have no courses you are enrolled to yet...</h1>
+    }
   </div>
   

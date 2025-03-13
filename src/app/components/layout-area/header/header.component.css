@@ -65,3 +65,7 @@ mat-toolbar {
     font-weight: bold;
     margin-left: 15px; 
 }
+
+.active{
+    text-decoration: underline !important;
+}

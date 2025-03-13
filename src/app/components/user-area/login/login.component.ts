@@ -1,28 +1,26 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CredentialsModel } from '../../../models/credentials.model';
-import { UserService } from '../../../services/user.service';
-import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { CredentialsModel } from '../../../models/credentials.model';
 import { NotificationService } from '../../../services/notification.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
     selector: 'app-login',
     imports: [ReactiveFormsModule, CommonModule, MatInputModule, MatButtonModule, MatFormFieldModule, MatCardModule],
     templateUrl: './login.component.html',
-    styleUrl: './login.component.css'
+    styleUrl: './login.component.css',
+    changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit {
 
     private credentials = new CredentialsModel();
     public credentialsForm: FormGroup;
-    private horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-    private verticalPosition: MatSnackBarVerticalPosition = 'top';
 
     public constructor(
         private userService: UserService,

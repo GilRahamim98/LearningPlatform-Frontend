@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, OnInit,signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnInit,signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,7 +17,8 @@ import { PreviewLessonModel } from '../../../models/previewLesson.model';
     selector: 'app-lesson-card',
     imports: [CommonModule,RouterModule, MatCardModule, MatButtonModule, MatIconModule],
     templateUrl: './lesson-card.component.html',
-    styleUrl: './lesson-card.component.css'
+    styleUrl: './lesson-card.component.css',
+    changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class LessonCardComponent implements OnInit {
 

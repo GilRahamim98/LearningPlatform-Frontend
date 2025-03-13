@@ -1,0 +1,25 @@
+.container {
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card {
+    padding: 32px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    text-align: center;
+  }
+
+  .error-code {
+    font-size: 72px;
+    font-weight: bold;
+    color: #e53e3e;
+  }
+
+  .error-message {
+    font-size: 18px;
+    color: #4a5568;
+    margin-top: 16px;
+  }

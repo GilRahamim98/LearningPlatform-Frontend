@@ -47,16 +47,12 @@
                     Password is required
                 </mat-error>
                 <mat-error
-                    *ngIf="userForm.get('passwordControl')?.hasError('minlength') && userForm.get('passwordControl')?.touched">
-                    Password must be at least 8 characters
-                </mat-error>
-                <mat-error
-                    *ngIf="userForm.get('passwordControl')?.hasError('maxlength') && userForm.get('passwordControl')?.touched">
-                    Password must be at most 100 characters long
-                </mat-error>
-                <mat-error
-                    *ngIf="userForm.get('passwordControl')?.hasError('pattern') && userForm.get('passwordControl')?.touched">
-                    Password must contain at least one uppercase letter, one number, and one special character
+                    *ngIf="
+                    (userForm.get('passwordControl')?.hasError('pattern') || 
+                    userForm.get('passwordControl')?.hasError('minlength')|| 
+                    userForm.get('passwordControl')?.hasError('maxlength') )
+                    && userForm.get('passwordControl')?.touched">Password must be between 8 and 14 characters long and contain at least one uppercase letter, one
+                    number, and one special character.
                 </mat-error>
             </mat-form-field>
 

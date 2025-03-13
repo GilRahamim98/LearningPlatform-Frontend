@@ -1,7 +1,7 @@
 import { Component,inject } from '@angular/core';
 import { LogoComponent } from "../logo/logo.component";
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { UserStore } from '../../../storage/user-store';
 import { UserService } from '../../../services/user.service';
@@ -11,7 +11,7 @@ import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule,MatToolbarModule,RouterLink,LogoComponent,MatIconModule,MatButtonModule, MatMenuModule],
+  imports: [CommonModule,RouterModule,MatToolbarModule,LogoComponent,MatIconModule,MatButtonModule, MatMenuModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,7 +12,8 @@ import { EnrollmentListComponent } from '../../enrollment-area/enrollment-list/e
   selector: 'app-profile',
   imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, EnrollmentListComponent],
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  styleUrl: './profile.component.css',
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class ProfileComponent implements OnInit{
     public user:UserModel;
