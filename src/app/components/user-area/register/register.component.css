@@ -60,6 +60,7 @@ button[disabled] {
     font-weight: bold;
     color: #2f37d3;
     display: block;
+    margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }
 

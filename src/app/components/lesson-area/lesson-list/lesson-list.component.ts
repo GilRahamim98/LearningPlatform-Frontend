@@ -30,9 +30,7 @@ export class LessonListComponent implements OnInit {
             
             if(this.isEnrolled){
                 this.lessons.set(await this.lessonService.getLessonsByCourse(this.courseId));
-            }else{
-                console.log("not enrolled");
-                
+            }else{                
                 this.lessons.set((await this.lessonService.getLessonPreviewByCourse(this.courseId)).map(preview=>({
                     id:preview.id,
                     title:preview.title,
@@ -42,9 +40,7 @@ export class LessonListComponent implements OnInit {
             }
         }else if(roleName === "Instructor" || roleName === "Admin"){
             this.lessons.set(await this.lessonService.getLessonsByCourse(this.courseId));
-        }else{
-            console.log("guest");
-            
+        }else{            
             this.lessons.set((await this.lessonService.getLessonPreviewByCourse(this.courseId)).map(preview=>({
                 id:preview.id,
                 title:preview.title,

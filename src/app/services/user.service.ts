@@ -45,8 +45,8 @@ export class UserService {
         const token = await firstValueFrom(token$);
         const payload = jwtDecode<{ user: string }>(token);
         const dbUser = JSON.parse(payload.user);
-        this.userStore.initUser(dbUser);
         localStorage.setItem("token", token);
+        this.userStore.initUser(dbUser);
     }
 
 
@@ -55,10 +55,12 @@ export class UserService {
         const token = await firstValueFrom(token$);
         const payload = jwtDecode<{ user: string }>(token);
         const dbUser = JSON.parse(payload.user);
-        this.userStore.initUser(dbUser);
-        this.getStudentEnrollments(this.userStore.user()?.id);
-        this.getStudentProgress(this.userStore.user()?.id);
         localStorage.setItem("token", token);
+        this.userStore.initUser(dbUser);
+        if (this.userStore.RoleName() === "Student") {
+            this.getStudentEnrollments(this.userStore.user()?.id);
+            this.getStudentProgress(this.userStore.user()?.id);
+        }
     }
 
     public logout(): void {
@@ -130,7 +132,7 @@ export class UserService {
         return this.enrollmentStore.enrollments()?.some(e => e.courseId === courseId);
     }
 
-    public getUserRoleName():string{
+    public getUserRoleName(): string {
         return this.userStore.RoleName();
     }
 }
