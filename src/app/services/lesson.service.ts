@@ -12,41 +12,43 @@ export class LessonService {
 
     private http = inject(HttpClient);
 
-
+    // Fetch all lessons for a specific course from the server
     public async getLessonsByCourse(courseId: string): Promise<LessonModel[]> {
+        // Send a GET request to fetch lessons by course ID
         const lessons$ = this.http.get<LessonModel[]>(environment.lessonsUrl + `course/${courseId}`);
         const lessons = await firstValueFrom(lessons$);
         return lessons;
     }
 
+    // Fetch lesson previews for a specific course from the server
     public async getLessonPreviewByCourse(courseId: string): Promise<PreviewLessonModel[]> {
+        // Send a GET request to fetch lesson previews by course ID
         const lessons$ = this.http.get<PreviewLessonModel[]>(environment.lessonsUrl + `course-preview/${courseId}`);
         const lessons = await firstValueFrom(lessons$);
         return lessons;
     }
 
-    public async getLessonById(lessonId: string): Promise<LessonModel> {
-        const lesson$ = this.http.get<LessonModel>(environment.lessonsUrl + lessonId);
-        const lesson = await firstValueFrom(lesson$);
-        return lesson;
-    }
-
+    // Add multiple lessons to the server
     public async addLessons(lessons: LessonModel[]): Promise<void> {
-        const lessons$ = this.http.post(environment.lessonsUrl+"add-multiple", lessons);
+        // Send a POST request to add multiple lessons
+        const lessons$ = this.http.post(environment.lessonsUrl + "add-multiple", lessons);
         await firstValueFrom(lessons$);
     }
 
-    public async deleteLessons(ids:string[]):Promise<void>{
-        const lessons$ = this.http.delete(environment.lessonsUrl+"delete-multiple",{body:ids});
+    // Delete multiple lessons from the server
+    public async deleteLessons(ids: string[]): Promise<void> {
+        // Send a DELETE request to remove multiple lessons
+        const lessons$ = this.http.delete(environment.lessonsUrl + "delete-multiple", { body: ids });
         await firstValueFrom(lessons$);
     }
 
-    public async updateLesson(lesson: LessonModel): Promise<LessonModel> {
-        const lesson$ = this.http.put<LessonModel>(environment.lessonsUrl + lesson.id, lesson);
-        const dbLesson = await firstValueFrom(lesson$);
-        return dbLesson;
+    // Update multiple lessons on the server
+    public async updateLessons(lessons: LessonModel[]): Promise<void> {
+        // Send a PUT request to update multiple lessons
+        const lessons$ = this.http.put(environment.lessonsUrl + "update-multiple", lessons);
+        await firstValueFrom(lessons$);
     }
 
-    
+
 
 }

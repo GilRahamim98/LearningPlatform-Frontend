@@ -28,6 +28,7 @@ export class UserService {
     private progressStore = inject(ProgressStore);
     private lessonService = inject(LessonService);
 
+    // Constructor to initialize the user from the token if available
     public constructor() {
         const token = localStorage.getItem("token");
         if (!token) return;
@@ -35,11 +36,12 @@ export class UserService {
         const dbUser = JSON.parse(payload.user);
         this.userStore.initUser(dbUser);
         if (this.userStore.RoleName() === "Student") {
-            this.getStudentEnrollments(this.userStore.user()?.id);
-            this.getStudentProgress(this.userStore.user()?.id);
+             this.getStudentEnrollments(this.userStore.user()?.id);            
+             this.getStudentProgresses(this.userStore.user()?.id);
         }
     }
 
+    // Register a new user
     public async register(user: CreateUserModel): Promise<void> {
         const token$ = this.http.post(environment.usersUrl + "register", user, { responseType: "text" });
         const token = await firstValueFrom(token$);
@@ -49,7 +51,7 @@ export class UserService {
         this.userStore.initUser(dbUser);
     }
 
-
+    // Login a user
     public async login(credentials: CredentialsModel): Promise<void> {
         const token$ = this.http.post(environment.usersUrl + "login", credentials, { responseType: "text" });
         const token = await firstValueFrom(token$);
@@ -59,10 +61,11 @@ export class UserService {
         this.userStore.initUser(dbUser);
         if (this.userStore.RoleName() === "Student") {
             this.getStudentEnrollments(this.userStore.user()?.id);
-            this.getStudentProgress(this.userStore.user()?.id);
+            this.getStudentProgresses(this.userStore.user()?.id);
         }
     }
 
+    // Logout the user
     public logout(): void {
         this.userStore.logoutUser();
         this.enrollmentStore.clearEnrollment();
@@ -70,12 +73,14 @@ export class UserService {
         localStorage.removeItem("token");
     }
 
+    // Enroll a student in a course
     public async enrollStudent(enrollment: EnrollmentModel): Promise<void> {
         const dbEnrollment$ = this.http.post<EnrollmentModel>(environment.usersUrl + "enroll-to-course", enrollment);
         const dbEnrollment = await firstValueFrom(dbEnrollment$);
         this.enrollmentStore.addEnrollment(dbEnrollment);
     }
 
+    // Unenroll a student from a course
     public async unenrollStudent(enrollmentId: string): Promise<void> {
         const dbEnrollment$ = this.http.delete<void>(environment.usersUrl + `unenroll/${enrollmentId}`);
         await firstValueFrom(dbEnrollment$);
@@ -85,6 +90,7 @@ export class UserService {
         this.enrollmentStore.deleteEnrollment(enrollmentId);
     }
 
+    // Get all enrollments for a student
     public async getStudentEnrollments(studentId: string): Promise<EnrollmentModel[]> {
         if (this.enrollmentStore.enrollments()?.length > 0) return this.enrollmentStore.enrollments();
         const enrollments$ = this.http.get<EnrollmentModel[]>(environment.usersUrl + `enrollments/${studentId}`);
@@ -93,17 +99,20 @@ export class UserService {
         return enrollments;
     }
 
+    // Get enrollment by course ID
     public async getEnrollmentByCourse(courseId: string): Promise<EnrollmentModel> {
         return await this.enrollmentStore.enrollments().filter(e => e.courseId === courseId)[0];
     }
 
+    // Get all courses a student is enrolled in
     public async getStudentCourses(studentId: string): Promise<CourseModel[]> {
         const enrollments = await this.getStudentEnrollments(studentId);
         const courses = (await this.courseService.getAllCourses()).filter(c => enrollments.some(e => e.courseId === c.id));
         return courses;
     }
 
-    public async getStudentProgress(studentId: string): Promise<ProgressModel[]> {
+    // Get all progress records for a student
+    public async getStudentProgresses(studentId: string): Promise<ProgressModel[]> {
         if (this.progressStore.progresses()?.length > 0) return this.progressStore.progresses();
         const progresses$ = this.http.get<ProgressModel[]>(environment.usersUrl + `progress-by-user/${studentId}`);
         const progresses = await firstValueFrom(progresses$);
@@ -111,27 +120,30 @@ export class UserService {
         return progresses;
     }
 
+    // Get progress of a student in a specific course
     public async getStudentProgressInCourse(studentId: string, courseId: string): Promise<Progress> {
-        const progresses = await this.getStudentProgress(studentId);
+        const progresses = await this.getStudentProgresses(studentId);
         const lessons = await this.lessonService.getLessonsByCourse(courseId);
         const watchedLessons = lessons.filter(l => progresses.some(p => p.lessonId == l.id));
         const progress = new Progress();
         progress.watched = watchedLessons?.length;
         progress.total = lessons?.length;
-
         return progress;
     }
 
+    // Mark a lesson as watched
     public async watchLesson(createProgress: CreateProgressModel): Promise<void> {
         const progress$ = this.http.post<ProgressModel>(environment.usersUrl + "progresses", createProgress);
         const progress = await firstValueFrom(progress$);
         this.progressStore.addProgress(progress);
     }
 
+    // Check if a student is enrolled in a course
     public isEnrolled(courseId: string): boolean {
         return this.enrollmentStore.enrollments()?.some(e => e.courseId === courseId);
     }
 
+    // Get the role name of the current user
     public getUserRoleName(): string {
         return this.userStore.RoleName();
     }

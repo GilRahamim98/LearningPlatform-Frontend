@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { CourseModel } from '../../../models/course.model';
 import { CourseService } from '../../../services/course.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CourseCardComponent } from "../course-card/course-card.component";
 import { UserStore } from '../../../storage/user-store';
@@ -21,13 +21,13 @@ export class CourseListComponent implements OnInit {
     public courses = signal<CourseModel[]>([]);
 
     public constructor(
-        private courseService: CourseService,
         private router: Router,
-        private notificationService: NotificationService
+        private notificationService: NotificationService,
+        private activatedRoute:ActivatedRoute
     ) { }
     public async ngOnInit() {
         try {
-            this.courses.set(await this.courseService.getAllCourses());
+            this.courses.set(this.activatedRoute.snapshot.data["allCourses"]);
         } catch (err: any) {
             this.notificationService.error(err.message);
         }

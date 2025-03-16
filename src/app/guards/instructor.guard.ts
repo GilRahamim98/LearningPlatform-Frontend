@@ -2,6 +2,7 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 
+// Guard to restrict access to instructor user routes.
 export const instructorGuard: CanActivateFn = (route, state) => {
     const token = localStorage.getItem("token");
     const router = inject(Router);

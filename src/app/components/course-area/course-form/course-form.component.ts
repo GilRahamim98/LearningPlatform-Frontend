@@ -19,16 +19,16 @@ import { DiscardDialogComponent } from '../../dialogs/course-dialogs/discard-dia
 
 @Component({
     selector: 'app-course-form',
-    imports: [CommonModule, ReactiveFormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule,MatIcon, LessonFormComponent],
+    imports: [CommonModule, ReactiveFormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIcon, LessonFormComponent],
     templateUrl: './course-form.component.html',
     styleUrl: './course-form.component.css',
-    changeDetection:ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseFormComponent implements OnInit {
     public courseForm: FormGroup;
     public course: CourseModel;
     private originalLessons: LessonModel[] = [];
-    public isEdit = false;
+    public isEdit = false; // Flag to check if the form is in edit mode
 
     public constructor(
         private formBuilder: FormBuilder,
@@ -41,9 +41,11 @@ export class CourseFormComponent implements OnInit {
         private cdr: ChangeDetectorRef
     ) { }
 
+    // Initialize the component
     public async ngOnInit() {
         const id = this.activeRoute.snapshot.params["id"];
         if (id) {
+            // If an ID is present, the form is in edit mode
             this.isEdit = true;
             this.course = await this.courseService.getCourseById(id);
             this.originalLessons = await this.lessonService.getLessonsByCourse(id);
@@ -61,6 +63,7 @@ export class CourseFormComponent implements OnInit {
             this.cdr.markForCheck();
 
         } else {
+            // If no ID is present, the form is in create mode
             this.courseForm = this.formBuilder.group({
                 titleControl: new FormControl("", [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
                 descriptionControl: new FormControl("", [Validators.required, Validators.minLength(2), Validators.maxLength(1000)]),
@@ -69,10 +72,12 @@ export class CourseFormComponent implements OnInit {
         }
     }
 
+    // Getter for the lessons form array
     public get lessons(): FormArray {
         return this.courseForm.get('lessons') as FormArray;
     }
 
+    // Add a new lesson to the lessons form array
     public addLesson(): void {
         const lessonForm = this.formBuilder.group({
             id: new FormControl(undefined),
@@ -83,10 +88,12 @@ export class CourseFormComponent implements OnInit {
         this.lessons.push(lessonForm);
     }
 
+    // Remove a lesson from the lessons form array
     public removeLesson(index: number): void {
         this.lessons.removeAt(index);
     }
 
+    // Add a new course
     public async addCourse() {
         try {
             const title = this.courseForm.get('titleControl')?.value;
@@ -112,6 +119,7 @@ export class CourseFormComponent implements OnInit {
         }
     }
 
+    // Edit an existing course
     public async editCourse() {
         try {
             const title = this.course.title !== this.courseForm.get('titleControl')?.value ? this.courseForm.get('titleControl')?.value : this.course.title;
@@ -158,8 +166,8 @@ export class CourseFormComponent implements OnInit {
                 await this.lessonService.addLessons(newLessons);
             }
 
-            for (const lesson of updatedLessons) {
-                await this.lessonService.updateLesson(lesson);
+            if (updatedLessons.length > 0) {
+                await this.lessonService.updateLessons(updatedLessons);
             }
 
             if (deletedLessonIds.length > 0) {
@@ -173,6 +181,7 @@ export class CourseFormComponent implements OnInit {
         }
     }
 
+    // Open the edit course dialog
     public openEditDialog(): void {
         const dialogRef = this.dialog.open(EditCourseDialogComponent, {
             width: '250px',
@@ -188,7 +197,8 @@ export class CourseFormComponent implements OnInit {
         });
     }
 
-    public openGoBackDialog():void{
+    // Open the discard changes dialog
+    public openGoBackDialog(): void {
         const dialogRef = this.dialog.open(DiscardDialogComponent, {
             width: '250px',
             height: '200px',

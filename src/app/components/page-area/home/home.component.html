@@ -1,29 +1,46 @@
 <div class="container">
-    <div class="left-section">
-        <div class="hero-section">
+    <div>
+        <div>
             <h1 class="title">
-                <span class="highlight">AcademiaX</span>
+                Hi, We are <span class="highlight">AcademiaX</span>
             </h1>
             <p class="description">
-                Learning is the key that unlocks endless possibilities - every new skill and idea shapes the future
+                Learning is the key that unlocks endless possibilities -<br> every new skill and idea shapes the future
                 you're
-                building today. </p>
+                building today.
+            </p>
+
+            <button mat-raised-button color="primary" routerLink="/courses">Discover Courses</button>
+
         </div>
-
-    </div>
-
-    <div class="right-section">
-        <div class="columns-section">
-            <mat-card class="task-card">
-                <mat-card-title>About Us</mat-card-title>
+        <h2 class="title">
+            About Us
+        </h2>
+        <div class="about-us">
+            <div class="about-left">
+                <img mat-card-image src="assets/images/pc.jpg" alt="pc" />
+            </div>
+            <div class="about-right">
                 <p>At AcademiaX, we offer high-quality online courses to help you learn new skills and grow. Join our
                     community and take control of your learning journey today!</p>
-            </mat-card>
-            <img mat-card-image src="assets/images/pc.jpg" alt="pc" />
+                <div class="contact">
+                    <div>
+                        <span class="contact-icon"><mat-icon>phone</mat-icon></span>
+                        <span class="contact-value">+972548314569</span>
+                    </div>
+                    <div>
+                        <span class="contact-icon"><mat-icon>email</mat-icon></span>
+                        <span class="contact-value">{{'academiax@academix.com'}}</span>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
 
-        <button mat-raised-button color="primary" routerLink="/courses">Discover Courses</button>
-        <h2>Recommendations:</h2>
+        <h3 class="title">
+            Students Recommendations 
+        </h3>
         <div class="recommend-section">
             <mat-card class="recommend-card">
                 <mat-card-title>Incredible Learning Experience!</mat-card-title>
@@ -54,6 +71,5 @@
             </mat-card>
         </div>  
     </div>
-
-
 </div>
+

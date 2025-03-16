@@ -14,6 +14,8 @@
     </mat-card>
     @if(userStore.RoleName() === 'Student'){
     <app-enrollment-list />
+    }@else if(userStore.RoleName() === 'Instructor'){
+        <h2>Hey {{user.name}}!</h2>
     }
 
 </div>

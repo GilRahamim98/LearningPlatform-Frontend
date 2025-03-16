@@ -11,9 +11,11 @@ const initialState: ProgressState = {
     progresses: null
 }
 
+// Signal store for managing progress tracking
 export const ProgressStore = signalStore(
     { providedIn: "root" },
     withState(initialState),
+    // Define methods to manipulate the store's state
     withMethods(store => ({
         initProgresses(progresses: ProgressModel[]): void {
             patchState(store, _currentState => ({ progresses }));
@@ -28,8 +30,6 @@ export const ProgressStore = signalStore(
             patchState(store, _currentState => ({ progresses: [] as ProgressModel[] }));
         }
     })),
-
+    // Enables developer tools only in development mode for easier debugging
     environment.isDevelopment && withDevtools("ProgressStore")
-
-
 )

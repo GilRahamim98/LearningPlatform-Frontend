@@ -20,7 +20,7 @@
             }@else if(userStore.RoleName() === 'Instructor' || userStore.RoleName() === 'Admin'){
                 <button mat-raised-button (click)="openVideo()">Watch Lesson</button>
             }@else {
-                <button mat-raised-button [disabled]=""><mat-icon>lock</mat-icon>Enroll To Watch</button>
+                <button mat-raised-button routerLink="/courses"><mat-icon>lock</mat-icon>Enroll To Watch</button>
 
             }
           </mat-card-actions>

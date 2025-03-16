@@ -1,13 +1,19 @@
 <div class="add-course-container">
     <mat-card class="add-course-card">
+        <!-- Back button icon -->
         <mat-icon class="go-back" (click)="openGoBackDialog()">keyboard_backspace</mat-icon>
+        
+        <!-- Conditional title based on course existence -->
         @if(course){
         <h2>Edit Course</h2>
         }@else {
         <h2>Add New Course</h2>
         }
+        
+        <!-- Course form -->
         <form [formGroup]="courseForm" (ngSubmit)="isEdit?openEditDialog():addCourse()" *ngIf="courseForm">
             <mat-card-content>
+                <!-- Title input field -->
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Title</mat-label>
                     <input matInput formControlName="titleControl" placeholder="Enter course title">
@@ -22,10 +28,10 @@
                     </mat-error>
                 </mat-form-field>
 
+                <!-- Description input field -->
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Description</mat-label>
-                    <textarea matInput formControlName="descriptionControl"
-                        placeholder="Enter course description"></textarea>
+                    <textarea matInput formControlName="descriptionControl" placeholder="Enter course description"></textarea>
                     <mat-error *ngIf="courseForm.get('descriptionControl')?.hasError('required')">
                         Description is required
                     </mat-error>
@@ -36,31 +42,34 @@
                         Description must be at most 1000 characters long
                     </mat-error>
                 </mat-form-field>
-
             </mat-card-content>
 
             <mat-card-actions class="add-course-actions">
+                <!-- Add lesson button -->
                 <button mat-raised-button type="button" class="add-lesson-button" (click)="addLesson()">Add Lesson</button>
+                
+                <!-- Conditional submit button based on edit mode -->
                 @if(isEdit){
-                    <button mat-raised-button color="primary" class="add-course-button" type="submit"
-                    [disabled]="courseForm.invalid">
+                <button mat-raised-button color="primary" class="add-course-button" type="submit" [disabled]="courseForm.invalid">
                     Edit Course
                 </button>
                 }@else {
-                <button mat-raised-button color="primary" class="add-course-button" type="submit"
-                    [disabled]="courseForm.invalid">
+                <button mat-raised-button color="primary" class="add-course-button" type="submit" [disabled]="courseForm.invalid">
                     Add Course
                 </button>
                 }
             </mat-card-actions>
 
+            <!-- Lessons list -->
             <div formArrayName="lessons" class="lesson-container">
                 <div *ngFor="let lesson of lessons.controls; let i = index" [formGroupName]="i">
                     <mat-card class="lesson-card">
                         <mat-card-content>
+                            <!-- Lesson form component -->
                             <app-lesson-form [lessonForm]="$any(lesson)"></app-lesson-form>
                         </mat-card-content>
                         <mat-card-actions>
+                            <!-- Remove lesson button -->
                             <button mat-button type="button" (click)="removeLesson(i)">Remove Lesson</button>
                         </mat-card-actions>
                     </mat-card>

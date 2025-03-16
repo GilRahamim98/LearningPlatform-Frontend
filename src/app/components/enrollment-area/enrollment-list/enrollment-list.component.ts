@@ -4,6 +4,8 @@ import { UserService } from '../../../services/user.service';
 import { UserStore } from '../../../storage/user-store';
 import { EnrollmentCardComponent } from '../enrollment-card/enrollment-card.component';
 import { CourseModel } from '../../../models/course.model';
+import { NotificationService } from '../../../services/notification.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-enrollment-list',
@@ -17,13 +19,16 @@ export class EnrollmentListComponent implements OnInit {
 
     private userService = inject(UserService);
     private userStore = inject(UserStore);
+    private notificationService = inject(NotificationService);
 
     public async ngOnInit() {
         try{
-            this.courses.set(await this.userService.getStudentCourses(this.userStore.user().id));
-
+            const storedEnrollments = this.userStore.user()?.id ? await this.userService.getStudentEnrollments(this.userStore.user()?.id) : [];
+            if(storedEnrollments.length>0){
+                this.courses.set(await this.userService.getStudentCourses(this.userStore.user()?.id));
+            }
         }catch(err:any){
-            console.log(err); 
+            this.notificationService.error("An error occurred while trying to retrieve the student's courses.");
         }   
     }
 

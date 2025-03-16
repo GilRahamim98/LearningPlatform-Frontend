@@ -35,7 +35,7 @@ export class CourseDetailsComponent implements OnInit {
     public async ngOnInit() {
         try {
             const id = this.activatedRoute.snapshot.params["id"];
-            this.course.set(await this.courseService.getCourseById(id));
+            this.course.set(this.activatedRoute.snapshot.data["courseDetails"]);
             this.lessons.set(await this.lessonService.getLessonPreviewByCourse(id));
         } catch (err: any) {
             this.notificationService.error("An error occurred while trying to get course details");

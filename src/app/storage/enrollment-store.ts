@@ -12,9 +12,11 @@ const initialState: EnrollmentState = {
     enrollments: null
 }
 
+// Signal store for managing enrollments
 export const EnrollmentStore = signalStore(
     { providedIn: "root" },
     withState(initialState),
+    // Defines methods for manipulating the store's state
     withMethods(store => ({
         initEnrollments(enrollments: EnrollmentModel[]): void {
             patchState(store, _currentState => ({ enrollments }));
@@ -29,7 +31,7 @@ export const EnrollmentStore = signalStore(
             patchState(store, _currentState => ({ enrollments: [] as EnrollmentModel[] }));
         }
     })),
-
+    // Enables developer tools only in development mode for easier debugging
     environment.isDevelopment && withDevtools("EnrollmentStore")
 
 
