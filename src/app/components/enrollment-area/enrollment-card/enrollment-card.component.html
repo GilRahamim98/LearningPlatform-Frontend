@@ -9,8 +9,8 @@
             <section class="progress-section">
                 <div>
                     <mat-progress-spinner class="background-spinner" [mode]="mode" [value]=100></mat-progress-spinner>
-                    <mat-progress-spinner [mode]="mode" [value]="value"></mat-progress-spinner>
-                    <div style="position:relative; top: -60px; ">{{value}}%</div>
+                    <mat-progress-spinner [mode]="mode" [value]="progressValue"></mat-progress-spinner>
+                    <div style="position:relative; top: -60px; ">{{progressValue}}%</div>
                 </div>
             </section>
             <p class="progress-text">{{ progress?.watched }} / {{ progress?.total }} lessons completed</p>
@@ -18,8 +18,8 @@
 
         <mat-card-actions>
             <button mat-raised-button (click)="viewCourseDetails(course.id)">View Course</button>
-            <button *ngIf="value!==100" mat-raised-button class="unenroll-button" (click)="openUnenrollDialog()">Unenroll</button>
-            <button *ngIf="value===100" mat-raised-button (click)="congrats()">Congrats</button>
+            <button *ngIf="progressValue!==100" mat-raised-button class="unenroll-button" (click)="openUnenrollDialog()">Unenroll</button>
+            <button *ngIf="progressValue===100" mat-raised-button (click)="congrats()">Congrats</button>
         </mat-card-actions>
     </mat-card>
 </mat-card>

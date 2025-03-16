@@ -18,7 +18,7 @@ import { NotificationService } from '../../../services/notification.service';
     imports: [ReactiveFormsModule, CommonModule, MatInputModule, MatButtonModule, MatFormFieldModule, MatCardModule, MatRadioModule, MatButtonToggleModule],
     templateUrl: './register.component.html',
     styleUrl: './register.component.css',
-    changeDetection:ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegisterComponent implements OnInit {
 
@@ -33,6 +33,7 @@ export class RegisterComponent implements OnInit {
     ) { }
 
     public ngOnInit(): void {
+        // Initializing the registration form with form controls and validators
         this.userForm = this.formBuilder.group({
             nameControl: new FormControl("", [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
             emailControl: new FormControl("", [Validators.required, Validators.maxLength(100), Validators.email]),
@@ -43,11 +44,13 @@ export class RegisterComponent implements OnInit {
 
     public async send() {
         try {
+            // Setting user data from form values
             this.user.name = this.userForm.get("nameControl").value;
             this.user.email = this.userForm.get("emailControl").value;
             this.user.password = this.userForm.get("passwordControl").value;
             this.user.roleId = this.userForm.get("roleControl").value;
 
+            // Sending registration request
             await this.userService.register(this.user);
             this.notificationService.success("Welcome!");
             this.router.navigateByUrl("/home");

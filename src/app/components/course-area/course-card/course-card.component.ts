@@ -40,6 +40,7 @@ export class CourseCardComponent implements OnInit {
     public course: CourseModel;
 
     public ngOnInit() {
+        // Check if the user is enrolled in the course
         this.isEnrolled = this.userService.isEnrolled(this.course.id);
     }
 
@@ -48,6 +49,7 @@ export class CourseCardComponent implements OnInit {
     }
 
     public enrollStudent(): void {
+        // Create a new enrollment and enroll the user in the course
         const enrollment = new EnrollmentModel();
         enrollment.courseId = this.course.id;
         enrollment.userId = this.userStore.user().id;
@@ -61,17 +63,19 @@ export class CourseCardComponent implements OnInit {
     }
 
     public async deleteCourse() {
-        try{
+        try {
+            // Delete the course and emit the deleted course ID
             await this.courseService.deleteCourse(this.course.id);
             this.deletedCourse.emit(this.course.id);
             this.notificationService.success("Course deleted successfully");
-        }catch(err: any){
+        } catch (err: any) {
             this.notificationService.error("An error occurred while trying to delete the course");
         }
     }
 
 
     public openDeleteDialog(): void {
+        // Open the delete course confirmation dialog
         const dialogRef = this.dialog.open(DeleteCourseDialogComponent, {
             width: '250px',
             height: '200px',
@@ -79,8 +83,8 @@ export class CourseCardComponent implements OnInit {
             exitAnimationDuration: '0ms',
         });
 
-        dialogRef.afterClosed().subscribe(async(result) => {
-            if (result) {                
+        dialogRef.afterClosed().subscribe(async (result) => {
+            if (result) {
                 await this.deleteCourse();
             }
         });

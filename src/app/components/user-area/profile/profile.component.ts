@@ -9,19 +9,20 @@ import { EnrollmentStore } from '../../../storage/enrollment-store';
 import { EnrollmentListComponent } from '../../enrollment-area/enrollment-list/enrollment-list.component';
 
 @Component({
-  selector: 'app-profile',
-  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, EnrollmentListComponent],
-  templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css',
-  changeDetection:ChangeDetectionStrategy.OnPush
+    selector: 'app-profile',
+    imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, EnrollmentListComponent],
+    templateUrl: './profile.component.html',
+    styleUrl: './profile.component.css',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfileComponent implements OnInit{
-    public user:UserModel;
+export class ProfileComponent implements OnInit {
+    public user: UserModel;
 
     public userStore = inject(UserStore);
     public enrollmentStore = inject(EnrollmentStore);
 
-    public ngOnInit(): void {        
+    public ngOnInit(): void {
+        // Setting user data from UserStore
         this.user = this.userStore.user();
     }
 

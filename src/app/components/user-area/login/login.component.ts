@@ -15,7 +15,7 @@ import { UserService } from '../../../services/user.service';
     imports: [ReactiveFormsModule, CommonModule, MatInputModule, MatButtonModule, MatFormFieldModule, MatCardModule],
     templateUrl: './login.component.html',
     styleUrl: './login.component.css',
-    changeDetection:ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit {
 
@@ -27,9 +27,10 @@ export class LoginComponent implements OnInit {
         private router: Router,
         private formBuilder: FormBuilder,
         private notificationService: NotificationService
-    ){}
+    ) { }
 
     public ngOnInit(): void {
+        // Initializing the login form with form controls and validators
         this.credentialsForm = this.formBuilder.group({
             emailControl: new FormControl("", [Validators.required, Validators.maxLength(100), Validators.email]),
             passwordControl: new FormControl("", [Validators.required, Validators.minLength(8), Validators.maxLength(100)])
@@ -38,15 +39,16 @@ export class LoginComponent implements OnInit {
 
     public async send() {
         try {
+            // Setting credentials from form values
             this.credentials.email = this.credentialsForm.get("emailControl").value;
             this.credentials.password = this.credentialsForm.get("passwordControl").value;
             await this.userService.login(this.credentials);
             this.notificationService.success("Welcome Back!");
-         
+
             this.router.navigateByUrl("/home");
         } catch (err: any) {
-            this.notificationService.error(JSON.parse(err.error)?.errors);         
-          
+            this.notificationService.error(JSON.parse(err.error)?.errors);
+
         }
     }
 

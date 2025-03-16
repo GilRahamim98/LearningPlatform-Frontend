@@ -7,6 +7,8 @@ import { guestGuard } from './guards/guest.guard';
 import { instructorGuard } from './guards/instructor.guard';
 import { courseListResolver } from './resolvers/course-list.resolver';
 import { courseResolver } from './resolvers/course.resolver';
+import { enrollmentListResolver } from './resolvers/enrollment-list.resolver';
+import { userCoursesResolver } from './resolvers/user-courses.resolver';
 
 export const routes: Routes = [
     {
@@ -22,6 +24,10 @@ export const routes: Routes = [
         path: "profile",
         loadComponent: () => import("./components/user-area/profile/profile.component").then(m => m.ProfileComponent),
         canActivate: [authGuard],
+        resolve: {
+            userEnrollments: enrollmentListResolver,
+            userCourses: userCoursesResolver
+        }
     },
     {
         path: "courses",
@@ -41,7 +47,7 @@ export const routes: Routes = [
     {
         path: "courses/:id",
         loadComponent: () => import("./components/course-area/course-details/course-details.component").then(m => m.CourseDetailsComponent),
-        resolve:{courseDetails:courseResolver}
+        resolve: { courseDetails: courseResolver }
     },
     {
         path: "register",

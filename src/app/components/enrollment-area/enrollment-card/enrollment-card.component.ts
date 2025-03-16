@@ -18,7 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
     imports: [CommonModule, MatCardModule, MatProgressBarModule, MatProgressSpinnerModule],
     templateUrl: './enrollment-card.component.html',
     styleUrl: './enrollment-card.component.css',
-    changeDetection:ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EnrollmentCardComponent implements OnInit {
 
@@ -30,24 +30,26 @@ export class EnrollmentCardComponent implements OnInit {
     private cdr = inject(ChangeDetectorRef);
 
     public mode: ProgressSpinnerMode = 'determinate';
-    public value = 0;
+    public progressValue = 0;
     public progress: Progress;
 
     @Output()
-    public unenrolled = new EventEmitter<string>();
+    public unenrolled = new EventEmitter<string>(); // Event emitter for unenrollment
 
     @Input()
     public course: CourseModel;
 
     public async ngOnInit() {
         this.progress = await this.userService.getStudentProgressInCourse(this.userStore.user().id, this.course.id);
-        this.value = (this.progress.total > 0) ? Math.round((this.progress.watched / this.progress.total) * 100) : 0;
+        this.progressValue = (this.progress.total > 0) ? Math.round((this.progress.watched / this.progress.total) * 100) : 0;
         this.cdr.markForCheck();
     }
 
     public async unenroll() {
         try {
+            // Unenrolling the student from the course
             await this.userService.unenrollStudent((await this.userService.getEnrollmentByCourse(this.course.id)).id);
+            // Emitting the unenrolled event
             this.unenrolled.emit(this.course.id);
             this.notificationService.success("You have successfully unenrolled from this course");
         } catch (err: any) {
@@ -55,9 +57,8 @@ export class EnrollmentCardComponent implements OnInit {
         }
     }
 
-
-
     public congrats() {
+        // Displaying confetti animation and success notification
         const jsConfetti = new JSConfetti();
         jsConfetti.addConfetti({
             confettiRadius: 6,
@@ -66,12 +67,12 @@ export class EnrollmentCardComponent implements OnInit {
         this.notificationService.success("Congrats, you have completed this course");
     }
 
-
     public viewCourseDetails(courseId: string): void {
         this.router.navigateByUrl("/courses/" + courseId);
     }
 
     public openUnenrollDialog(): void {
+        // Opening the unenroll confirmation dialog
         const dialogRef = this.dialog.open(UnenrollDialogComponent, {
             width: '250px',
             height: '200px',

@@ -1,9 +1,9 @@
 .enrollment-list-container{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 10px;
-  
+    justify-content: space-around;
+    gap: 10px 20px;
+    padding:0 150px;  
 }
 
 .enrollment-card-item{
